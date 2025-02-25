@@ -1,0 +1,3 @@
+-- DROP DATABASE products
+CREATE DATABASE products
+GO
