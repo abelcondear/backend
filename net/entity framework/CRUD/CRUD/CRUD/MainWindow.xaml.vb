@@ -30,50 +30,63 @@
         Dim ItemSaleItems As SaleItems = New SaleItems
         Dim ItemSales As Sales = New Sales
 
+        Dim ListItemSaleItems As List(Of SaleItems) = New List(Of SaleItems)
+
         Dim ListOutter As List(Of Clients) = QueryClients.ToList()
         Dim ListInner As List(Of Products) = QueryProducts.ToList()
 
-        Dim IdProduct As Integer
-        Dim UnitPrice As Double
+        REM Dim IdProduct As Integer
+        REM Dim UnitPrice As Double
         Dim Quantity As Integer
-        Dim Total As Double
+        Dim IncrementedTotal As Double = 0.0
 
-        Dim MaxAmount As Integer
+        Dim MaxAmount As Integer = 0
+        Dim MaxQuantity As Integer = 9
+        Dim RndValue As Double = 0.0
         Dim Count As Integer
 
         For Each ItemOutter In ListOutter
             Count = 0
-            Integer.TryParse(Math.Floor(((Rnd.NextDouble() * (ListInner.Count() - 1.0)) + 1.0)).ToString(), MaxAmount)
+            IncrementedTotal = 0.0
+
+            RndValue = Math.Floor(((Rnd.NextDouble() * (ListInner.Count() - 1.0)) + 1.0))
+            MaxAmount = Convert.ToInt32(RndValue)
+            ListItemSaleItems.Clear()
 
             For Each ItemInner In ListInner
                 Count = Count + 1
 
+                RndValue = Math.Floor(((Rnd.NextDouble() * (MaxQuantity - 1.0)) + 1.0))
+
+                Quantity = Convert.ToInt32(RndValue)
+
+                ItemSaleItems = New SaleItems REM Create new instance on every iteration so that it allocates data into a new memory space
+                ItemSaleItems.IdProduct = ItemInner.Id
+                ItemSaleItems.UnitPrice = ItemInner.Price
+                ItemSaleItems.Quantity = Quantity
+                ItemSaleItems.TotalPrice = ItemInner.Price * Quantity
+
+                ListItemSaleItems.Add(ItemSaleItems)
+
+                IncrementedTotal += ItemSaleItems.TotalPrice
+
                 If Count = MaxAmount Then
-
-                    IdProduct = ItemInner.Id
-                    UnitPrice = ItemInner.Price
-
-                    Integer.TryParse(Math.Floor(((Rnd.NextDouble() * (10.0 - 1.0)) + 1.0)).ToString(), Quantity)
-
-                    Total = UnitPrice * Quantity
-
-                    REM sum sales by set of products
-
                     ItemSales.IdClient = ItemOutter.Id
                     ItemSales._Date = Now()
-                    ItemSales.Total = Total
+                    ItemSales.Total = IncrementedTotal
 
                     ObProducts.Sales.Add(ItemSales)
                     ObProducts.SaveChanges()
 
-                    ItemSaleItems.IdSale = ItemSales.Id
-                    ItemSaleItems.IdProduct = IdProduct
-                    ItemSaleItems.UnitPrice = UnitPrice
-                    ItemSaleItems.Quantity = Quantity
-                    ItemSaleItems.TotalPrice = Total
+                    For Each Item In ListItemSaleItems
 
-                    ObSales.SaleItems.Add(ItemSaleItems)
-                    ObSales.SaveChanges()
+                        Item.IdSale = ItemSales.Id
+
+                        ObSales.SaleItems.Add(Item)
+                        ObSales.SaveChanges()
+                    Next
+
+                    Exit For
 
                 End If
             Next
