@@ -1,0 +1,13 @@
+﻿<Window x:Name="WndGrid" x:Class="GridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRUD"
+        mc:Ignorable="d"
+        Title="Grid Data" Height="331" Width="636">
+    <Grid Margin="0,0,10,15">
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="8" Margin="6,10,10,0"/>
+
+    </Grid>
+</Window>

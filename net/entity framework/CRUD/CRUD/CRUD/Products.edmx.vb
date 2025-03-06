@@ -24,6 +24,10 @@ Partial Public Class ClsProducts
             .Property(Function(e) e.Phone) _
             .IsUnicode(False)
 
+        REM modelBuilder.Entity(Of ItemResult)() _
+        REM .Property(Function(e) e.Name) _
+        REM .IsUnicode(False)
+
         modelBuilder.Entity(Of Clients)() _
             .Property(Function(e) e.Mail) _
             .IsUnicode(False)

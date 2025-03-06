@@ -54,6 +54,16 @@ CRUD
   resource lookups using this strongly typed resource class.
 </summary>
 </member>
+<member name="T:CRUD.GridWindow">
+<summary>
+GridWindow
+</summary>
+</member>
+<member name="M:CRUD.GridWindow.InitializeComponent">
+<summary>
+InitializeComponent
+</summary>
+</member>
 <member name="T:CRUD.Application">
 <summary>
 Application

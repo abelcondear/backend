@@ -1,4 +1,6 @@
-﻿Class MainWindow
+﻿Imports CRUD.GridWindow
+
+Class MainWindow
     Private Sub CmdSale_Click(sender As Object, e As RoutedEventArgs) Handles CmdSale.Click
         Dim ObProducts As ClsProducts = New ClsProducts
         Dim ObSales As ClsProducts = New ClsProducts
@@ -96,6 +98,11 @@
         MessageBox.Show("Sale added.", "Information", MessageBoxButton.OK, MessageBoxImage.Information)
 
         LoadData()
+
+        REM Call new window
+        Dim v As Window = New GridWindow
+        v.ShowDialog()
+
     End Sub
 
     Private Sub CmdFind_Click(sender As Object, e As RoutedEventArgs) Handles CmdFind.Click
