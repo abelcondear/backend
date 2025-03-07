@@ -1,0 +1,25 @@
+﻿<Window x:Name="WndGrid" x:Class="GridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRUD"
+        mc:Ignorable="d"
+        Title="Grid Data" Height="331" Width="636">
+    <Grid Margin="0,0,10,15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="123*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="8" Margin="6,10,10,0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="dataGridTextColumn0" Header="Client" Binding="{Binding Client}"/>
+                <DataGridTextColumn x:Name="dataGridTextColumn1" Header="Product" Binding="{Binding Product}"/>
+                <DataGridTextColumn x:Name="dataGridTextColumn2" Header="UnitPrice" Binding="{Binding UnitPrice}"/>
+                <DataGridTextColumn x:Name="dataGridTextColumn3" Header="Quantity" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn x:Name="dataGridTextColumn4" Header="Total" Binding="{Binding Total}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
