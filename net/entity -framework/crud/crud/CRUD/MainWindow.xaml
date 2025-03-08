@@ -12,10 +12,10 @@
             <ColumnDefinition Width="54*"/>
             <ColumnDefinition Width="129*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CmdSale" Content="Sale" HorizontalAlignment="Left" Height="34" Margin="482,21,0,0" VerticalAlignment="Top" Width="137" Grid.ColumnSpan="3"/>
+        <Button x:Name="CmdSale" Content="Sale" HorizontalAlignment="Left" Height="34" Margin="0,21,0,0" VerticalAlignment="Top" Width="137" Grid.ColumnSpan="2" Grid.Column="1"/>
         <Button x:Name="CmdFind" Content="Find" HorizontalAlignment="Left" Height="34" Margin="31,21,0,0" VerticalAlignment="Top" Width="137"/>
         <Button x:Name="CmdFindProduct" Content="Find Product" HorizontalAlignment="Left" Height="34" Margin="334,21,0,0" VerticalAlignment="Top" Width="137"/>
-        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="33,21,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2"/>
+        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="49,21,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2"/>
         <Button x:Name="CmdFindV2" Content="Find -Version II" HorizontalAlignment="Left" Height="34" Margin="182,21,0,0" VerticalAlignment="Top" Width="137"/>
         <ListBox x:Name="ListClient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,117,302,0" SelectionMode="Multiple" FontSize="10.5"/>
         <ListBox x:Name="ListProduct" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,117,126,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5"/>

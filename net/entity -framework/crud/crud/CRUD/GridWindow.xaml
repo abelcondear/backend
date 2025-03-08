@@ -11,7 +11,7 @@
             <ColumnDefinition Width="190*"/>
             <ColumnDefinition Width="123*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="8" Margin="6,10,10,0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+        <DataGrid x:Name="dataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" FontSize="10.5" Margin="6,10,10,0" AutoGenerateColumns="False" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="dataGridTextColumn0" Header="Client" Binding="{Binding Client}"/>
                 <DataGridTextColumn x:Name="dataGridTextColumn1" Header="Product" Binding="{Binding Product}"/>
