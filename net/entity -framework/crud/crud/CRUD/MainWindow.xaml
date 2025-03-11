@@ -7,22 +7,26 @@
         mc:Ignorable="d"
         Title="CRUD [ Entity Framework + SQL Server ]" Height="411" Width="869" MinWidth="530.015" MinHeight="421.267">
     <Grid Margin="0,0,15,25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="179*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="244*"/>
-            <ColumnDefinition Width="54*"/>
-            <ColumnDefinition Width="129*"/>
+            <ColumnDefinition Width="242*"/>
+            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="111*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CmdSale" Content="Sale" HorizontalAlignment="Left" Height="34" Margin="0,21,0,0" VerticalAlignment="Top" Width="137" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <Button x:Name="CmdFind" Content="Find" HorizontalAlignment="Left" Height="34" Margin="31,21,0,0" VerticalAlignment="Top" Width="137"/>
-        <Button x:Name="CmdFindProduct" Content="Find Product" HorizontalAlignment="Left" Height="34" Margin="334,21,0,0" VerticalAlignment="Top" Width="137"/>
-        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="49,21,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2"/>
-        <Button x:Name="CmdFindV2" Content="Find -Version II" HorizontalAlignment="Left" Height="34" Margin="182,21,0,0" VerticalAlignment="Top" Width="137"/>
-        <ListBox x:Name="ListClient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,117,302,0" SelectionMode="Multiple" FontSize="10.5"/>
-        <ListBox x:Name="ListProduct" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,117,126,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5"/>
-        <ListBox x:Name="ListResult" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="390,117,10,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5" Grid.ColumnSpan="3"/>
-        <Label x:Name="LblClient" Content="Clients" HorizontalAlignment="Left" Margin="31,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="155" FontSize="11" FontWeight="Bold"/>
-        <Label x:Name="LblProduct" Content="Products" HorizontalAlignment="Left" Margin="207,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="155" FontSize="11" FontWeight="Bold"/>
-        <Label x:Name="LblItems" Content="Items" HorizontalAlignment="Left" Margin="390,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="454" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="3"/>
+        <Button x:Name="CmdSale" Content="Sale" HorizontalAlignment="Center" Height="34" Margin="0,6,0,0" VerticalAlignment="Top" Width="136" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="CmdFind" Content="Find" HorizontalAlignment="Left" Height="34" Margin="31,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
+        <Button x:Name="CmdFindProduct" Content="Find Product" HorizontalAlignment="Left" Height="34" Margin="334,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
+        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="19,7,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2" Grid.Row="1"/>
+        <Button x:Name="CmdFindV2" Content="Find -Version II" HorizontalAlignment="Left" Height="34" Margin="182,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
+        <ListBox x:Name="ListClient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,102,302,0" SelectionMode="Multiple" FontSize="10.5" Grid.Row="1"/>
+        <ListBox x:Name="ListProduct" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,102,126,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5" Grid.Row="1"/>
+        <ListBox x:Name="ListResult" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="390,102,10,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <Label x:Name="LblClient" Content="Clients" HorizontalAlignment="Left" Margin="31,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="155" FontSize="11" FontWeight="Bold" Height="25" Grid.Row="1"/>
+        <Label x:Name="LblProduct" Content="Products" HorizontalAlignment="Left" Margin="207,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="155" FontSize="11" FontWeight="Bold" Height="25" Grid.Row="1"/>
+        <Label x:Name="LblItems" Content="Items" HorizontalAlignment="Left" Margin="390,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="-7.195,0.492" Width="454" FontSize="11" FontWeight="Bold" Grid.ColumnSpan="3" Height="25" Grid.Row="1"/>
 
     </Grid>
 </Window>

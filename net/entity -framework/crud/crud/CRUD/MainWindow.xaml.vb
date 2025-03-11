@@ -164,6 +164,7 @@ Class MainWindow
         Dim ObSales As ClsProducts = New ClsProducts
 
         Dim ObSaleDelete As ClsProducts = New ClsProducts
+        Dim QyItemSearchSales As IQueryable(Of Sales)
         Dim QyItemSearchSaleItems As IQueryable(Of SaleItems)
 
         Dim QueryProducts As IQueryable(Of Products)
@@ -172,6 +173,7 @@ Class MainWindow
         Dim ListClientName As List(Of String) = New List(Of String)
         Dim ListProductName As List(Of String) = New List(Of String)
         Dim ListSaleId As List(Of String) = New List(Of String)
+        Dim ListSaleItemsId As List(Of String) = New List(Of String)
 
         Dim ClientName As String = "Coke"
         ListClientName.Add("Coke")
@@ -186,6 +188,7 @@ Class MainWindow
         Dim p As String = String.Join(",", ListProductName.ToArray())
         Dim c As String = String.Join(",", ListClientName.ToArray())
         Dim s As String = ""
+        Dim o As String = ""
 
         QueryProducts = ObProducts.Products.Where(Function(product) p.IndexOf(product.Name) <> -1)
         QueryClients = ObSales.Clients.Where(Function(client) c.IndexOf(client.Name) <> -1)
@@ -242,7 +245,7 @@ Class MainWindow
                     ObProducts.Sales.Add(ItemSales) REM the sale must be done after all items have been sold out
                     ObProducts.SaveChanges()
 
-                    ListSaleId.Add(ItemSaleItems.Id.ToString())
+                    ListSaleId.Add("""" + ItemSales.Id.ToString() + """")
 
                     For Each Item In ListItemSaleItems
 
@@ -250,6 +253,8 @@ Class MainWindow
 
                         ObSales.SaleItems.Add(Item)
                         ObSales.SaveChanges()
+
+                        ListSaleItemsId.Add("""" + Item.Id.ToString() + """")
                     Next
 
                     Exit For
@@ -258,19 +263,33 @@ Class MainWindow
 
         Next
 
+        LoadData()
+
         MessageBox.Show("Sale added.", "Information", MessageBoxButton.OK, MessageBoxImage.Information)
 
-        s = String.Join(",", ListSaleId.ToArray())
+        REM remove items from sale
+        o = String.Join(",", ListSaleItemsId.ToArray())
 
         QyItemSearchSaleItems = ObSaleDelete.SaleItems.Where _
         (
-            Function(item) s.IndexOf(item.IdSale.ToString()) <> -1
+            Function(item) o.IndexOf("""" + item.Id.ToString() + """") <> -1
         )
 
         ObSaleDelete.SaleItems.RemoveRange(QyItemSearchSaleItems) REM remove range it is not working up to now
         ObSaleDelete.SaveChanges()
 
-        MessageBox.Show("Sale removed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information)
+        REM remove sale
+        s = String.Join(",", ListSaleId.ToArray())
+
+        QyItemSearchSales = ObSaleDelete.Sales.Where _
+        (
+            Function(item) s.IndexOf("""" + item.Id.ToString() + """") <> -1
+        )
+
+        ObSaleDelete.Sales.RemoveRange(QyItemSearchSales) REM remove range it is not working up to now
+        ObSaleDelete.SaveChanges()
+
+        MessageBox.Show("Sale and its items were removed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information)
 
         LoadData()
     End Sub
