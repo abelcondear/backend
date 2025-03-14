@@ -104,6 +104,8 @@
     <Compile Include="GridWindow.xaml.vb">
       <DependentUpon>GridWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchTypeException.vb" />
+    <Compile Include="Utils.vb" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

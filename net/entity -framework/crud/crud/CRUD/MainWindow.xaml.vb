@@ -1,4 +1,5 @@
 ﻿Imports CRUD.GridWindow
+Imports CRUD.Utils
 
 Class MainWindow
     Private Sub CmdSale_Click(sender As Object, e As RoutedEventArgs) Handles CmdSale.Click
@@ -237,7 +238,6 @@ Class MainWindow
                 IncrementedTotal += ItemSaleItems.TotalPrice
 
                 If Count = MaxAmount Then
-
                     ItemSales.IdClient = ItemOutter.Id
                     ItemSales._Date = Now()
                     ItemSales.Total = IncrementedTotal REM It keeps the incremented amount, already set before
@@ -246,6 +246,7 @@ Class MainWindow
                     ObProducts.SaveChanges()
 
                     ListSaleId.Add("""" + ItemSales.Id.ToString() + """")
+                    REM ListSaleId.Add(ItemSales.Id.ToString())
 
                     For Each Item In ListItemSaleItems
 
@@ -255,6 +256,7 @@ Class MainWindow
                         ObSales.SaveChanges()
 
                         ListSaleItemsId.Add("""" + Item.Id.ToString() + """")
+                        REM ListSaleItemsId.Add(Item.Id.ToString())
                     Next
 
                     Exit For
@@ -275,6 +277,11 @@ Class MainWindow
             Function(item) o.IndexOf("""" + item.Id.ToString() + """") <> -1
         )
 
+        REM QyItemSearchSaleItems = ObSaleDelete.SaleItems.Where _
+        REM (
+        REM Function(item) FindWholeText(o, item.Id.ToString(), SearchType.Numeric)
+        REM )
+
         ObSaleDelete.SaleItems.RemoveRange(QyItemSearchSaleItems) REM remove range it is not working up to now
         ObSaleDelete.SaveChanges()
 
@@ -285,6 +292,11 @@ Class MainWindow
         (
             Function(item) s.IndexOf("""" + item.Id.ToString() + """") <> -1
         )
+
+        REM QyItemSearchSales = ObSaleDelete.Sales.Where _
+        REM (
+        REM Function(item) FindWholeText(s, item.Id.ToString(), SearchType.Numeric)
+        REM )
 
         ObSaleDelete.Sales.RemoveRange(QyItemSearchSales) REM remove range it is not working up to now
         ObSaleDelete.SaveChanges()

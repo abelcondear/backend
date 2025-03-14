@@ -13,14 +13,14 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="242*"/>
-            <ColumnDefinition Width="74*"/>
-            <ColumnDefinition Width="111*"/>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="108*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="CmdSale" Content="Sale" HorizontalAlignment="Center" Height="34" Margin="0,6,0,0" VerticalAlignment="Top" Width="136" Grid.Column="1" Grid.Row="1"/>
         <Button x:Name="CmdFind" Content="Find" HorizontalAlignment="Left" Height="34" Margin="31,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
-        <Button x:Name="CmdFindProduct" Content="Find Product" HorizontalAlignment="Left" Height="34" Margin="334,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
-        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="19,7,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2" Grid.Row="1"/>
-        <Button x:Name="CmdFindV2" Content="Find -Version II" HorizontalAlignment="Left" Height="34" Margin="182,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
+        <Button x:Name="CmdFindProduct" Content="Find Product" HorizontalAlignment="Left" Height="34" Margin="337,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
+        <Button x:Name="CmdSalePlusRemove" Content="Sale and Remove" HorizontalAlignment="Left" Height="34" Margin="8,7,0,0" VerticalAlignment="Top" Width="138" Grid.Column="2" Grid.Row="1"/>
+        <Button x:Name="CmdFindV2" Content="Find -Version II" HorizontalAlignment="Left" Height="34" Margin="183,6,0,0" VerticalAlignment="Top" Width="137" Grid.Row="1"/>
         <ListBox x:Name="ListClient" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="31,102,302,0" SelectionMode="Multiple" FontSize="10.5" Grid.Row="1"/>
         <ListBox x:Name="ListProduct" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,102,126,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5" Grid.Row="1"/>
         <ListBox x:Name="ListResult" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="390,102,10,0" InputScope="Default" SelectionMode="Multiple" FontSize="10.5" Grid.ColumnSpan="3" Grid.Row="1"/>
