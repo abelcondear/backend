@@ -3,7 +3,6 @@ Imports CRUD.ItemResult
 
 Public Class GridWindow
     Public Sub New()
-
         Dim ObProduct As ClsProducts = New ClsProducts
 
         ' This call is required by the designer.
@@ -15,13 +14,12 @@ Public Class GridWindow
         Dim ListItems As List(Of ItemResult) = New List(Of ItemResult)
 
         Dim ItemSearchProducts = (
-        From p In ObProduct.Products
-        Join v In ObProduct.SaleItems On p.Id Equals v.IdProduct
-        Join b In ObProduct.Sales On v.IdSale Equals b.Id
-        Join c In ObProduct.Clients
-        On b.IdClient Equals c.Id
+            From p In ObProduct.Products
+            Join v In ObProduct.SaleItems On p.Id Equals v.IdProduct
+            Join b In ObProduct.Sales On v.IdSale Equals b.Id
+            Join c In ObProduct.Clients
+            On b.IdClient Equals c.Id
         ).ToList()
-
 
         REM dataGrid.ItemsSource = ItemSearchProducts
 

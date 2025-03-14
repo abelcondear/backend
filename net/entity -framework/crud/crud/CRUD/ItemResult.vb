@@ -4,5 +4,4 @@
     Public Property UnitPrice As String = ""
     Public Property Quantity As String = ""
     Public Property Total As String = ""
-
 End Class

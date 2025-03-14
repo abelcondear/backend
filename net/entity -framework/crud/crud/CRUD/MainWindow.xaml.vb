@@ -38,8 +38,6 @@ Class MainWindow
         Dim ListOutter As List(Of Clients) = QueryClients.ToList()
         Dim ListInner As List(Of Products) = QueryProducts.ToList()
 
-        REM Dim IdProduct As Integer
-        REM Dim UnitPrice As Double
         Dim Quantity As Integer
         Dim IncrementedTotal As Double = 0.0
 
@@ -103,7 +101,6 @@ Class MainWindow
         REM Call new window
         Dim v As Window = New GridWindow
         v.ShowDialog()
-
     End Sub
 
     Private Sub CmdFind_Click(sender As Object, e As RoutedEventArgs) Handles CmdFind.Click
@@ -131,12 +128,12 @@ Class MainWindow
 
         REM Search products (mandatory) and clients (optional)
         Dim ItemSearchProducts = (
-         From p In ObProduct.Products.Where(Function(product) product.Name.IndexOf(ProductName) <> -1)
-         Join v In ObProduct.SaleItems On p.Id Equals v.IdProduct
-         Join b In ObProduct.Sales On v.IdSale Equals b.Id
-         Join c In ObProduct.Clients.Where(Function(client) client.Name.IndexOf(ClientName) <> -1 Or 1 = 1)
-         On b.IdClient Equals c.Id
-        )
+             From p In ObProduct.Products.Where(Function(product) product.Name.IndexOf(ProductName) <> -1)
+             Join v In ObProduct.SaleItems On p.Id Equals v.IdProduct
+             Join b In ObProduct.Sales On v.IdSale Equals b.Id
+             Join c In ObProduct.Clients.Where(Function(client) client.Name.IndexOf(ClientName) <> -1 Or 1 = 1)
+             On b.IdClient Equals c.Id
+        ).Distinct()
 
         If ItemSearchProducts.Count() = 0 Then
             REM Search products (optional) and clients (mandatory)
@@ -146,7 +143,7 @@ Class MainWindow
                 Join b In ObProduct.Sales On v.IdSale Equals b.Id
                 Join c In ObProduct.Clients.Where(Function(client) client.Name.IndexOf(ClientName) <> -1)
                 On b.IdClient Equals c.Id
-            )
+            ).Distinct()
         End If
 
         If ItemSearchProducts.Count() = 0 Then
@@ -323,7 +320,6 @@ Class MainWindow
 
         QueryProducts = ObProducts.Products.Where(Function(product) p.IndexOf(product.Name) <> -1)
 
-
         Dim Rnd As New Random
 
         Dim List As List(Of Products) = QueryProducts.ToList()
@@ -341,7 +337,7 @@ Class MainWindow
             From r In ObProducts.Products.Where(Function(product) p.IndexOf(product.Name) <> -1)
             Join v In ObProducts.SaleItems.Where(Function(item) item.IdSale = d.IndexOf(item.IdProduct.ToString()) <> -1)
             On r.Id Equals v.IdProduct
-        )
+        ).Distinct()
 
         If ItemSearchProducts.Count() = 0 Then
             MessageBox.Show("There is no result.", "Information", MessageBoxButton.OK, MessageBoxImage.Information)
