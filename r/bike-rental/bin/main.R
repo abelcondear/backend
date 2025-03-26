@@ -20,9 +20,12 @@
 library(forecast)
 library(data.table)
 library(clock)
-
 library(lubridate)
 library(processx)
+
+source("model.R")
+
+createModel("input.txt")
 
 run("node", c("model.js"))
 
