@@ -1,4 +1,5 @@
 library(hash)
+source("configuration.R")
 
 createModel <- function(name){
   fileConn<-file(name)
@@ -58,7 +59,7 @@ createLine <- function(rowid) {
   weather <- 0
   season <- 0
   
-  data <- list(
+  retval <- c(
     id,
     bike_model,
     quantity, 
@@ -70,39 +71,11 @@ createLine <- function(rowid) {
     season
   );
   
-  return(retval)
+  return(paste(retval,collapse=";"))
 }
 
+set_all_config()
 createNumber(4, TRUE)
 createAlpha(4)
+createLine(1)
 
-arr_weather <- list("hot","cold","rainy")
-arr_season <- list("summer", "winter", "autumn", "spring")
-
-bike <- hash()
-
-bike[["prefix_len"]] <- 4
-bike[["suffix_len"]] <- 4
-
-hhmm <- hash()
-
-hhmm[["hour_len"]] <- 2
-hhmm[["minute_len"]] <- 2
-
-label <- hash()
-
-label[["first"]] <- "09:00 AM-10:00 AM"
-label[["second"]] <- "10:00 AM-12:00 PM"
-label[["third"]] <- "12:00 PM-02:00 PM"
-label[["fourth"]] <- "02:00 PM-04:00 PM"
-label[["fifth"]] <- "04:00 PM-06:00 PM"
-label[["sixth"]] <- "06:00 PM-07:00 PM"
-
-label[["morning"]] <- "morning"
-label[["midday"]] <- "midday"
-label[["afternoon"]] <- "afternoon"
-label[["evening"]] <- "evening"
-
-label
-arr_weather
-arr_season
