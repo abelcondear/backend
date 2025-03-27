@@ -1,49 +1,49 @@
-1;0050-DVBX;3;01:50 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;autumn
-2;0082-PQOV;4;05:47 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
-3;0033-EENF;2;04:15 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;winter
-4;0082-LPFH;2;03:59 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;winter
-5;0099-DTZC;2;05:31 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
-6;0105-HWME;3;10:59 AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
-7;0066-XVMO;2;05:25 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;spring
-8;0039-UYCS;4;03:19 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;spring
-9;0065-KUEZ;2;03:55 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;autumn
-10;0064-FOHL;2;03:25 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;autumn
-11;0048-IDGV;2;04:48 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;winter
-12;0067-ZQFO;3;10:22 AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;winter
-13;0090-MBCZ;4;01:37 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;winter
-14;0063-KWSN;3;01:15 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;autumn
-15;0084-JRJT;2;05:40 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;winter
-16;0029-VMPL;3;01:24 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;autumn
-17;0026-JLBZ;2;07:00 PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;spring
-18;0068-QVJY;4;07:00 PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;autumn
-19;0074-LICL;4;03:32 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;autumn
-20;0105-JSHS;3;10:49 AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;winter
-21;0015-JLQF;4;12:25 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;spring
-22;0072-SNIQ;2;07:00 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;winter
-23;0037-TIJG;3;01:01 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;autumn
-24;0108-JNPZ;3;01:26 PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;autumn
-25;0063-VQPL;3;06:55 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;autumn
-26;0085-VGGO;2;05:25 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;winter
-27;0036-OKHB;4;02:13 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;spring
-28;0039-SWGJ;2;06:20 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;autumn
-29;0035-YGIO;4;03:07 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;winter
-30;0045-OSME;2;03:21 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;winter
-31;0095-VRWV;4;05:10 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;autumn
-32;0077-KNQE;4;12:42 PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;autumn
-33;0029-EFMD;2;07:00 PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;winter
-34;0078-RFTS;4;12:19 PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;spring
-35;0038-OLKB;4;10:19 AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;winter
-36;0011-ZOON;3;05:54 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
-37;0069-YIID;3;06:30 PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;spring
-38;0107-WJOV;2;10:49 AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;spring
-39;0036-GUBP;4;06:15 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;winter
-40;0046-WZUD;3;10:38 AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;winter
-41;0071-XTIF;3;05:17 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;winter
-42;0036-WXXV;3;11:35 AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;spring
-43;0036-DHRG;4;02:15 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;winter
-44;0089-EOOZ;2;07:00 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;spring
-45;0087-LMHZ;3;02:28 PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;spring
-46;0019-ZEGJ;3;06:42 PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;autumn
-47;0045-ILGD;2;05:31 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;winter
-48;0057-NNWR;3;11:23 AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
-49;0062-OEOW;4;05:52 PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;winter
+1;0041-GVKT;2;02:032PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;winter
+2;0047-SJQR;2;03:031PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;autumn
+3;0017-QWLE;3;012:01PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;spring
+4;0078-IJNJ;3;02:050PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;autumn
+5;0060-ZSIL;4;03:020PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;spring
+6;0049-RTWO;3;011:04AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;autumn
+7;0085-MTGZ;4;04:01PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;winter
+8;0089-UJBY;2;01:047PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;winter
+9;0054-FGEZ;2;010:035AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
+10;0095-CDRJ;2;06:051PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;spring
+11;0027-ZJWD;4;04:049PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
+12;0044-IZUN;2;01:020PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;winter
+13;0075-IZCL;2;05:052PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
+14;0071-YFFL;4;03:011PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;autumn
+15;0080-XZVT;2;05:011PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;winter
+16;0020-JEXK;2;01:014PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;autumn
+17;0072-RGBX;3;03:030PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;spring
+18;0032-FQZP;4;01:02PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;winter
+19;0063-WMKT;4;010:039AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;autumn
+20;0043-CLVU;3;07:00PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;spring
+21;0025-UHGT;3;04:06PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;autumn
+22;0026-LZPM;3;010:035AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
+23;0073-IUCV;3;010:051AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
+24;0051-VLWI;3;07:00PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;winter
+25;0033-KMQL;2;06:03PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;winter
+26;0031-NHFO;3;06:02PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;winter
+27;0013-YVRP;4;012:026PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;spring
+28;0096-ORKO;2;04:050PM;2025-01-01;04:00 PM-06:00 PM;afternoon;cold;spring
+29;0037-UXMC;2;07:00PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;autumn
+30;0058-EWUM;4;012:048PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;winter
+31;0073-UZCR;4;02:054PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;winter
+32;0079-EGWU;2;02:059PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;spring
+33;0027-JWHC;3;06:029PM;2025-01-01;06:00 PM-07:00 PM;evening;rainy;autumn
+34;0055-THSX;4;012:09PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;winter
+35;0036-BLLZ;4;010:023AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;autumn
+36;0017-VPVL;2;02:037PM;2025-01-01;02:00 PM-04:00 PM;afternoon;rainy;spring
+37;0011-MHBC;4;011:012AM;2025-01-01;10:00 AM-12:00 PM;morning;cold;spring
+38;0022-VUGP;3;03:055PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;winter
+39;0073-GDIK;2;01:04PM;2025-01-01;12:00 PM-02:00 PM;midday;cold;winter
+40;0085-GKPT;4;02:058PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;winter
+41;0076-UTCZ;3;010:040AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;winter
+42;0016-LRDY;3;03:027PM;2025-01-01;02:00 PM-04:00 PM;afternoon;cold;autumn
+43;0065-WUOZ;3;05:047PM;2025-01-01;04:00 PM-06:00 PM;afternoon;rainy;spring
+44;0069-JLOW;3;011:045AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;autumn
+45;0082-QRLE;2;01:031PM;2025-01-01;12:00 PM-02:00 PM;midday;rainy;spring
+46;0089-RCZC;3;010:021AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;winter
+47;0058-SFJR;4;011:011AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;autumn
+48;0088-MHIG;4;011:017AM;2025-01-01;10:00 AM-12:00 PM;morning;rainy;spring
+49;0072-DEIV;2;07:00PM;2025-01-01;06:00 PM-07:00 PM;evening;cold;spring

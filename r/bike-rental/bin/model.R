@@ -1,9 +1,9 @@
-library(hash)
-source("configuration.R")
+library(kit)
+source("global.R")
 
-createModel <- function(name){
+createFile <- function(name, content){
   fileConn<-file(name)
-  writeLines(c("aaaa","bbbb","cccc","dddd","eeee", "ffff"), fileConn)
+  writeLines(content, fileConn)
   close(fileConn)
 }
 
@@ -17,14 +17,14 @@ getCurrentYear <- function(){
 
 createNumber <- function(len, leading_zero=TRUE) {
   retval <- ""
+  
   if (leading_zero){
     zero <- ""  
     
-    for(x in 1:len-1){ 
-      zero <- c(zero, "0")  
-    }
+    for(x in 1:len-1){ zero <- c(zero, "0")  }
     
-    retval <- paste(c(paste(zero, collapse=""), getRandomN(100, 10)), collapse="")
+    retval <- paste( c(paste(zero, collapse=""), getRandomN(100, 10)), collapse="" )
+    
     retval <- substring(retval, nchar(retval) - (len-1), nchar(retval))
   }
   else {
@@ -42,40 +42,87 @@ createAlpha <- function(len){
     chr <- intToUtf8(getRandomN(90, 65))
     retval <- c(retval, chr)
   }
-  
+
   return(paste(retval, collapse=""))
 }
 
 createLine <- function(rowid) {
-  retval <- "--not implemented yet--"
-
+  setConfiguration()
+  
   id <- rowid
-  bike_model<- 0
-  quantity <- 0
-  hour <- 0
-  date <- 0
-  from_to <- 0
-  shift <- 0 
-  weather <- 0
-  season <- 0
   
-  retval <- c(
+  prefix <- createNumber(4)
+  prefix <- substring(prefix, nchar(prefix) - bike[["prefix_len"]], nchar(prefix))
+
+  suffix <- createAlpha(bike[["suffix_len"]])
+
+  bike_model<- paste(c(prefix, suffix), collapse="-")
+  quantity <- getRandomN(4, 1)
+  
+
+  h <- 9 + getRandomN(10, 0)
+  hh <- paste(c("0", iif(h > 12, h - 12, h)), collapse="")
+  mm <- paste(c("0", iif(h != 19, getRandomN(59, 0), 0)), collapse="")
+  rr <- iif(as.numeric(hh) == 12 || (as.numeric(hh) >= 1 && as.numeric(hh) <= 7), "PM", "AM")
+  
+  hh <- substring(hh, nchar(hh) - hhmm[["hour_len"]], nchar(hh))
+  mm <- substring(mm, nchar(mm) - hhmm[["minute_len"]], nchar(mm))
+  
+  hour <- paste(c(hh, ":", mm, rr), collapse="")    
+
+  date <- paste(c(getCurrentYear(), "-01-01"), collapse="")
+  
+  from_to <- ""
+  if (as.numeric(hh) >= 9 && as.numeric(hh) < 10) { from_to <- label[["first"]] }
+  if (as.numeric(hh) >= 10 && as.numeric(hh) < 12) { from_to <- label[["second"]] }
+  if (as.numeric(hh) == 12 || (as.numeric(hh) >= 1 && as.numeric(hh) < 2)) { from_to <- label[["third"]] }
+  if (as.numeric(hh) >= 2 && as.numeric(hh) < 4) { from_to <- label[["fourth"]] }
+  if (as.numeric(hh) >= 4 && as.numeric(hh) < 6) { from_to <- label[["fifth"]] }
+  if (as.numeric(hh) >= 6 && as.numeric(hh) <= 7) { from_to <- label[["sixth"]] }
+  
+  shift <- ""
+  if (from_to == label[["first"]]) { shift <- label[["morning"]] }
+  if (from_to == label[["second"]]) { shift <- label[["morning"]] }
+  if (from_to == label[["third"]]) { shift <- label[["midday"]] }
+  if (from_to == label[["fourth"]]) { shift <- label[["afternoon"]] }
+  if (from_to == label[["fifth"]]) { shift <- label[["afternoon"]] }
+  if (from_to == label[["sixth"]]) { shift <- label[["evening"]] }
+  
+  weather <- dict_weather[[sprintf("%d",getRandomN(3, 1))]]
+  season <- dict_season[[sprintf("%d",getRandomN(4, 1))]]
+  
+  line <- paste0(
     id,
+    delimiter,
     bike_model,
+    delimiter,
     quantity, 
-    hour, 
+    delimiter,
+    hour,
+    delimiter,
     date,
+    delimiter,
     from_to, 
+    delimiter,
     shift, 
+    delimiter,
     weather, 
+    delimiter,
     season
-  );
+  )
   
-  return(paste(retval,collapse=";"))
+  return(line)
 }
 
-set_all_config()
-createNumber(4, TRUE)
-createAlpha(4)
-createLine(1)
+createModel <- function(name) {
+  lines <- list()
+  line <- ""
+  
+  for (i in 1:49) {
+    line <- createLine(i)
+    lines <- append(lines, line)
+  }
+  
+  createFile(name, paste0(lines))
+}
 

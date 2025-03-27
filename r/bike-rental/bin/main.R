@@ -1,8 +1,9 @@
-### Your Challenge ###
+###### Challenge #####
 #
 # Your challenge will be to conduct a time series data analysis 
 # to forecast future rental bike demands. To do this, you will load, 
 # clean, process, analyze, and visualize data. 
+#
 # You will also pose questions, and seek to answer them meaningfully using 
 # the dataset provided. In addition, you will build time series models to 
 # forecast future demands.
@@ -25,9 +26,11 @@ library(processx)
 
 source("model.R")
 
-createModel("input.txt")
+#R version
+createModel("input.csv")
 
-run("node", c("model.js"))
+#node version
+#run("node", c("model.js"))
 
 dd <- fread("input.csv");
 items <- dd[,V3]
