@@ -1,8 +1,8 @@
 import pickle
 
 class file:
-    filename_token = "tokenizer.pickle"
-    filename_encoder = "label_encoder.pickle"
+    filename_token = "./files/tokenizer.pickle"
+    filename_encoder = "./files/label_encoder.pickle"
 
     def __init__(self):
         pass

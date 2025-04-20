@@ -6,6 +6,9 @@ class Token:
         self.token = Tokenizer(num_words=num_words, oov_token=oov_token)
         self.maxlen = maxlen
     
+    def __del__(self):
+        pass
+        
     def exec(self, training_sentences):
         self.token.fit_on_texts(training_sentences)
         word_index = self.token.word_index

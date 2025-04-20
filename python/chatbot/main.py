@@ -1,8 +1,14 @@
-import loader as ld
-import encoder as enc
-import tokenizer as tok
-import model as md
-import file as fi
+import warnings
+import os
+
+warnings.filterwarnings("ignore")
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
+import lib.loader as ld
+import lib.encoder as enc
+import lib.tokenizer as tok
+import lib.model as md
+import lib.file as fi
 
 import numpy as np 
 import pickle
@@ -37,7 +43,8 @@ def initilize():
 
     return (loader, file, model)
 
-def chat(loader, file, model):
+def chat(parameters):
+    (loader, file, model) = parameters
     model = keras.models.load_model(model.filename_model)
 
     data = loader.loadjson()
@@ -59,7 +66,8 @@ def chat(loader, file, model):
             break
 
         result = model.predict(keras.preprocessing.sequence.pad_sequences(tokenizer.texts_to_sequences([user_input]),
-                                             truncating='post', maxlen=max_len))
+                                             truncating='post', maxlen=max_len),
+                                             verbose=0)
         tag = lbl_encoder.inverse_transform([np.argmax(result)])
 
         for i in data['intents']:
@@ -68,8 +76,5 @@ def chat(loader, file, model):
 
 if __name__ == '__main__':
     colorama.init()
-
-    print(Fore.YELLOW + "Start messaging with the bot (type quit to stop)!" + Style.RESET_ALL)
-
-    (loader, file, model) = initilize()
-    chat(loader, file, model)
+    print(Fore.YELLOW + "Type \"quit\" to stop." + Style.RESET_ALL)
+    chat(initilize())
