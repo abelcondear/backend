@@ -1,0 +1,42 @@
+body {
+  background-color: #282c34;  
+}
+
+.App-header {
+  padding-top: 1.5em;
+  padding-left: 1.5em;  
+  display: flex;
+  flex-direction: column;
+  height:17em;
+  overflow-y:auto;
+}
+
+  label.label-user, 
+  label.label-ai {
+    color: #FFFFFF;
+    font-size: .85em;
+    font-family: "sans-serif";
+    line-height: 2em;
+    padding-bottom: .75em;
+    
+  }
+
+.input-area {
+  background-color: #282c34;
+  height:2.5em;
+  padding-left: 1.5em;  
+}
+
+  .input-area input {
+    font-size: .85em;
+    font-family: "sans-serif";
+    width:70%;
+    padding: .65em
+  }
+
+  .input-area button {
+    font-size: .85em;
+    font-family: "sans-serif";
+    width:20%;
+    padding: .65em
+  }
