@@ -1,5 +1,7 @@
 import {chat} from './Chat.js';
-let ch = null;
+
+let ch = new chat();
+ch.loadChat();
 
 function sendMessage() {
     let ob = document.getElementById("txtInput");   
@@ -9,12 +11,11 @@ function sendMessage() {
     const userName = "Me";
 
     ob.value = "";
-    ch.loadChat(userInput);
+    ch.send(userInput);
 
     let ob_header = document.getElementsByClassName("App-header")[0];
-    let child = null;
 
-    child = document.createElement("label");
+    let child = document.createElement("label");
     child.className = "label-user"
     child.innerText = `${userName}: ${userInput}`;
     ob_header.appendChild(child);
@@ -29,19 +30,18 @@ function sendMessage() {
     }
 }
 
+function keyPress(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+}
 
-function TextBox() {
-    ch = new chat();
-
+function TextBox() {   
     return (
         <div class="input-area">
-            <input type="text" id="txtInput" size="20"/>
-            <button onClick={()=>{sendMessage()}}>Enviar</button>
-            <br/>
-            <div id="lblMessage"></div>
+            <input type="text" id="txtInput" size="20" onKeyDown={(e)=>{keyPress(e)}}/>           
         </div>
     );
 }
 
 export default TextBox;
-

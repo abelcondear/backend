@@ -14,13 +14,10 @@ export class chat {
     return Math.round(Math.random() * (b - a)) + a;
   }
 
-  loadChat(userPrompt) {
-    this.userPrompt = userPrompt;
-
+  loadChat() {
     use.load().then((loadedModel) => {
       this.model = loadedModel;
       console.log("Model loaded");
-      this.startChatbot();
     });
   }
  
@@ -45,33 +42,82 @@ export class chat {
 
   async generateResponse(userInput) {
     const intent = await this.recognizeIntent(userInput);
-
-    if (intent && responses[intent]) {
-      return responses[intent];
+    const index = (intent) ? this.getRandomNumber(0, responses[intent].length-1):0;
+    
+    if (intent && responses[intent][index]) {
+      return responses[intent][index];
     } else {
       return "I'm sorry, I don't understand that. Can you please rephrase?";
     }
   }
 
-  startChatbot() {
-    let userPrompt = this.userPrompt;
+  async send(userPrompt) { 
+    let col_ai = document.getElementsByClassName("label-ai");
 
-    const send = async (userPrompt) => { 
-      const userInput = userPrompt;
-      const userOutput = await this.generateResponse(userInput);
-      const agentName = "Larry Hart";
+    document.currentElement = col_ai;
+    document.labelUserOutput = "";
+    document.outputReady = false;
+    document.writingReady = false;
+    document.idIntervals = [];
+    document.counter = 0;
 
-      let col_ai = document.getElementsByClassName("label-ai");
-      col_ai[col_ai.length-1].innerText = `${agentName}: ${userOutput}`;
+    const randomNumbers = [2, 1, 2, 2, 1, 2, 2, 1, 2, 1]; 
+    const rndNumber = randomNumbers[this.getRandomNumber(0, randomNumbers.length-1)];
 
-      let ob_header = document.getElementsByClassName("App-header")[0];
-  
-      if (typeof(ob_header.scrollTop) != 'undefined') {
-          ob_header.scrollTop = ob_header.scrollHeight;
-      }
+    document.idIntervals[1] = window.setInterval(()=>{
+      if (document.outputReady) {
+        try {
+          document.counter += 1;
+          let label = document.currentElement[document.currentElement.length-1];
         
-    };
+          if (document.counter == 2) { //at least twice, this block code was executed
+            document.writingReady = true;
 
-    send(userPrompt);
+            if (document.labelUserOutput.length != 0) {
+              label.innerText = document.labelUserOutput;
+            }
+              
+            window.clearInterval(document.idIntervals[0]);
+            window.clearInterval(document.idIntervals[1]);        
+          }
+        } catch (error) {
+          console.log(error);                
+          window.clearInterval(document.idIntervals[1]);           
+        }
+      }
+    },1400*rndNumber);
+
+    document.idIntervals[0] = window.setInterval(()=>{
+      if (!document.outputReady && !document.writingReady) {
+        try {
+          let label = document.currentElement[document.currentElement.length-1];
+          let text = label.innerText;
+          
+          if (text == "") { text = "."; }
+          else if (text == ".") { text = ".."; }
+          else if (text == "..") { text = "..."; }
+          else if (text == "...") { text = ""; }
+          
+          label.innerText = text;          
+        } catch (error) {
+          console.log(error);
+          window.clearInterval(document.idIntervals[0]);
+        } 
+      }
+    },500);
+
+    const userInput = userPrompt;
+    const userOutput = await this.generateResponse(userInput);       
+
+    const agentName = "Larry Hart";   
+    document.labelUserOutput = `${agentName}: ${userOutput}`;
+
+    document.outputReady = true;
+
+    let ob_header = document.getElementsByClassName("App-header")[0];
+
+    if (typeof(ob_header.scrollTop) != 'undefined') {
+        ob_header.scrollTop = ob_header.scrollHeight;
+    }            
   }
 }
