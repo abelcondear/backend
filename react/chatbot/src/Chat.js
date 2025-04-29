@@ -60,8 +60,9 @@ export class chat {
     document.writingReady = false;
     document.idIntervals = [];
     document.counter = 0;
+    document.maxCounter = 2;
 
-    const randomNumbers = [2, 1, 2, 2, 1, 2, 2, 1, 2, 1]; 
+    const randomNumbers = [2, 2, 2, 2, 1, 2, 2, 1, 2, 1]; 
     const rndNumber = randomNumbers[this.getRandomNumber(0, randomNumbers.length-1)];
 
     document.idIntervals[1] = window.setInterval(()=>{
@@ -70,11 +71,17 @@ export class chat {
           document.counter += 1;
           let label = document.currentElement[document.currentElement.length-1];
         
-          if (document.counter == 2) { //at least twice, this block code was executed
+          if (document.counter == document.maxCounter) { //at least twice, this block code was executed
             document.writingReady = true;
 
             if (document.labelUserOutput.length != 0) {
-              label.innerText = document.labelUserOutput;
+              label.innerHTML = document.labelUserOutput;
+
+              let ob_header = document.getElementsByClassName("App-header")[0];
+
+              if (typeof(ob_header.scrollTop) != 'undefined') {
+                  ob_header.scrollTop = ob_header.scrollHeight;
+              }              
             }
               
             window.clearInterval(document.idIntervals[0]);
@@ -85,7 +92,7 @@ export class chat {
           window.clearInterval(document.idIntervals[1]);           
         }
       }
-    },1400*rndNumber);
+    },1100*rndNumber);
 
     document.idIntervals[0] = window.setInterval(()=>{
       if (!document.outputReady && !document.writingReady) {
@@ -94,30 +101,32 @@ export class chat {
           let text = label.innerText;
           
           if (text == "") { text = "."; }
-          else if (text == ".") { text = ".."; }
-          else if (text == "..") { text = "..."; }
-          else if (text == "...") { text = ""; }
+          else if (text == ".") { text = ". ."; }
+          else if (text == ". .") { text = ". . ."; }
+          else if (text == ". . .") { text = ". . . ."; }
+          else if (text == ". . . .") { text = ". . . . ."; }
+          else if (text == ". . . . .") { text = ""; }
           
-          label.innerText = text;          
+          label.innerHTML = `<strong>${text}</strong>`;  
+
+          let ob_header = document.getElementsByClassName("App-header")[0];
+
+          if (typeof(ob_header.scrollTop) != 'undefined') {
+              ob_header.scrollTop = ob_header.scrollHeight;
+          }            
         } catch (error) {
           console.log(error);
           window.clearInterval(document.idIntervals[0]);
         } 
       }
-    },500);
+    },200);
 
     const userInput = userPrompt;
     const userOutput = await this.generateResponse(userInput);       
 
     const agentName = "Larry Hart";   
-    document.labelUserOutput = `${agentName}: ${userOutput}`;
+    document.labelUserOutput = `<strong>${agentName}</strong>: ${userOutput}`;
 
     document.outputReady = true;
-
-    let ob_header = document.getElementsByClassName("App-header")[0];
-
-    if (typeof(ob_header.scrollTop) != 'undefined') {
-        ob_header.scrollTop = ob_header.scrollHeight;
-    }            
   }
 }

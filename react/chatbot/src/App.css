@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 body {
   background-color: #282c34;  
 }
@@ -7,15 +9,15 @@ body {
   padding-left: 1.5em;  
   display: flex;
   flex-direction: column;
-  height:17em;
+  height:25em;
   overflow-y:auto;
 }
 
   label.label-user, 
   label.label-ai {
     color: #FFFFFF;
-    font-size: .85em;
-    font-family: "sans-serif";
+    font-size: .94em;
+    font-family: "Open Sans", "sans-serif";
     line-height: 2em;
     padding-bottom: .75em;
     
@@ -27,9 +29,13 @@ body {
   padding-left: 1.5em;  
 }
 
+  .input-area input[type="text"] {
+    border: 0.24em solid gray;
+  }
+
   .input-area input {
-    font-size: .85em;
-    font-family: "sans-serif";
-    width:95%;
+    font-size: .94em;
+    font-family: "Open Sans", "sans-serif";
+    width:90%;
     padding: .65em
   }

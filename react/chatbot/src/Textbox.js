@@ -4,12 +4,12 @@ let ch = new chat();
 ch.loadChat();
 
 function sendMessage() {
+    const userName = "Me";
+
     let ob = document.getElementById("txtInput");   
     let userInput = ob.value;   
     let userOutput = "";
     
-    const userName = "Me";
-
     ob.value = "";
     ch.send(userInput);
 
@@ -17,12 +17,12 @@ function sendMessage() {
 
     let child = document.createElement("label");
     child.className = "label-user"
-    child.innerText = `${userName}: ${userInput}`;
+    child.innerHTML = `<strong>${userName}</strong>: ${userInput}`;
     ob_header.appendChild(child);
 
     child = document.createElement("label");
     child.className = "label-ai"
-    child.innerText = userOutput;
+    child.innerHTML = userOutput;
     ob_header.appendChild(child);
 
     if (typeof(ob_header.scrollTop) != 'undefined') {
