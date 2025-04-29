@@ -5,22 +5,28 @@ import {intents} from './extra/intents.js';
 import {responses} from './extra/responses.js';
 
 export class chat {
-
   constructor() {
-    this.model = null;
+    //this.model = null;
+    use.load().then((loadedModel) => {
+      this.model = loadedModel;
+      console.log("Model loaded");
+    });
+
+    document.ob_this = this;
   }
 
   getRandomNumber(a, b) {
     return Math.round(Math.random() * (b - a)) + a;
   }
+  
+  moveDownScrollBar() {
+    let ob_header = document.getElementsByClassName("App-header")[0];
 
-  loadChat() {
-    use.load().then((loadedModel) => {
-      this.model = loadedModel;
-      console.log("Model loaded");
-    });
+    if (typeof(ob_header.scrollTop) != 'undefined') {
+        ob_header.scrollTop = ob_header.scrollHeight;
+    }
   }
- 
+  
   async recognizeIntent(userInput) { 
     const userInputEmb = await this.model.embed([userInput]);
     let maxScore = -1;
@@ -52,9 +58,8 @@ export class chat {
   }
 
   async send(userPrompt) { 
-    let col_ai = document.getElementsByClassName("label-ai");
-
-    document.currentElement = col_ai;
+    document.textbox = document.getElementById("txtInput");
+    document.currentElement = document.getElementsByClassName("label-ai");
     document.labelUserOutput = "";
     document.outputReady = false;
     document.writingReady = false;
@@ -62,7 +67,7 @@ export class chat {
     document.counter = 0;
     document.maxCounter = 2;
 
-    const randomNumbers = [2, 2, 2, 2, 1, 2, 2, 1, 2, 1]; 
+    const randomNumbers = [1, 2, 2, 2, 1, 2, 2, 1, 2, 1]; 
     const rndNumber = randomNumbers[this.getRandomNumber(0, randomNumbers.length-1)];
 
     document.idIntervals[1] = window.setInterval(()=>{
@@ -76,12 +81,10 @@ export class chat {
 
             if (document.labelUserOutput.length != 0) {
               label.innerHTML = document.labelUserOutput;
-
-              let ob_header = document.getElementsByClassName("App-header")[0];
-
-              if (typeof(ob_header.scrollTop) != 'undefined') {
-                  ob_header.scrollTop = ob_header.scrollHeight;
-              }              
+              document.ob_this.moveDownScrollBar();
+              document.textbox.style.backgroundColor = "white";
+              document.textbox.readOnly = false;              
+              document.textbox.placeholder="";              
             }
               
             window.clearInterval(document.idIntervals[0]);
@@ -92,7 +95,7 @@ export class chat {
           window.clearInterval(document.idIntervals[1]);           
         }
       }
-    },1100*rndNumber);
+    },2400*rndNumber);
 
     document.idIntervals[0] = window.setInterval(()=>{
       if (!document.outputReady && !document.writingReady) {
@@ -107,13 +110,8 @@ export class chat {
           else if (text == ". . . .") { text = ". . . . ."; }
           else if (text == ". . . . .") { text = ""; }
           
-          label.innerHTML = `<strong>${text}</strong>`;  
-
-          let ob_header = document.getElementsByClassName("App-header")[0];
-
-          if (typeof(ob_header.scrollTop) != 'undefined') {
-              ob_header.scrollTop = ob_header.scrollHeight;
-          }            
+          label.innerHTML = `<strong>${text}</strong>`;           
+          document.ob_this.moveDownScrollBar();
         } catch (error) {
           console.log(error);
           window.clearInterval(document.idIntervals[0]);

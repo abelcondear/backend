@@ -3,13 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import TextBox from './Textbox';
+import AgentImage from './AgentImage';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    <TextBox />
+    <div class="container">
+      <div class="left-side">
+        <AgentImage />
+      </div>
+      <div class="right-side">
+        <App />
+        <TextBox />      
+      </div>
+    </div>
   </React.StrictMode>
 );
 

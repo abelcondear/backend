@@ -1,7 +1,7 @@
 import {chat} from './Chat.js';
 
 let ch = new chat();
-ch.loadChat();
+//ch.loadChat();
 
 function sendMessage() {
     const userName = "Me";
@@ -10,6 +10,9 @@ function sendMessage() {
     let userInput = ob.value;   
     let userOutput = "";
     
+    ob.style.backgroundColor = "gray";
+    ob.readOnly = true;
+    ob.placeholder="Wait a moment, please.";
     ob.value = "";
     ch.send(userInput);
 
@@ -25,9 +28,7 @@ function sendMessage() {
     child.innerHTML = userOutput;
     ob_header.appendChild(child);
 
-    if (typeof(ob_header.scrollTop) != 'undefined') {
-        ob_header.scrollTop = ob_header.scrollHeight;
-    }
+    document.ob_this.moveDownScrollBar();
 }
 
 function keyPress(e) {
