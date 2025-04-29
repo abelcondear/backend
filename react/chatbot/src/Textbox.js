@@ -1,7 +1,6 @@
 import {chat} from './Chat.js';
 
 let ch = new chat();
-//ch.loadChat();
 
 function sendMessage() {
     const userName = "Me";

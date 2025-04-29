@@ -6,7 +6,6 @@ import {responses} from './extra/responses.js';
 
 export class chat {
   constructor() {
-    //this.model = null;
     use.load().then((loadedModel) => {
       this.model = loadedModel;
       console.log("Model loaded");
