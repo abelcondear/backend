@@ -3,7 +3,8 @@ import {chat} from './Chat.js';
 let ch = new chat();
 
 function sendMessage() {
-    const userName = "Me";
+    //const userName = "Me";
+    const userName = "Marcelo Lopez";
 
     let ob = document.getElementById("txtInput");   
     let userInput = ob.value;   
@@ -41,6 +42,7 @@ function TextBox() {
         <div class="input-area">
             <input type="text" id="txtInput" size="20" onKeyDown={(e)=>{keyPress(e)}}/>           
         </div>
+        
     );
 }
 

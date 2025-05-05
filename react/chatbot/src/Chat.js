@@ -4,6 +4,14 @@ import * as use from '@tensorflow-models/universal-sentence-encoder'
 import {intents} from './extra/intents.js';
 import {responses} from './extra/responses.js';
 
+//note: as much the question is accuraate, the response will be more accurate
+
+const decodeISO88591 = (input) => {
+  const decoder = new TextDecoder('iso-8859-1');
+  const encodedData = new Uint8Array(input.split('').map(char => char.charCodeAt(0)));
+  return decoder.decode(encodedData);
+};
+
 export class chat {
   constructor() {
     use.load().then((loadedModel) => {
@@ -26,6 +34,17 @@ export class chat {
     }
   }
   
+  encodingStrings(jsonObject) {
+    let jsonResult = {};
+    for (const [intent, examples] of Object.entries(jsonObject)) {
+      for (const ex in examples) {
+        jsonResult[intent] = new Array();
+        jsonResult[intent][ex] = decodeISO88591(jsonObject[intent][ex]);
+      }
+    } 
+    return jsonResult; 
+  }
+
   async recognizeIntent(userInput) { 
     const userInputEmb = await this.model.embed([userInput]);
     let maxScore = -1;
@@ -52,7 +71,8 @@ export class chat {
     if (intent && responses[intent][index]) {
       return responses[intent][index];
     } else {
-      return "I'm sorry, I don't understand that. Can you please rephrase?";
+      //return "I'm sorry, I don't understand that. Can you please rephrase?";
+      return "Lo siento, no entiendo eso. ¿Puede por favor reformular la pregunta?";
     }
   }
 
@@ -79,6 +99,7 @@ export class chat {
             document.writingReady = true;
 
             if (document.labelUserOutput.length != 0) {
+
               label.innerHTML = document.labelUserOutput;
               document.ob_this.moveDownScrollBar();
               document.textbox.style.backgroundColor = "white";
