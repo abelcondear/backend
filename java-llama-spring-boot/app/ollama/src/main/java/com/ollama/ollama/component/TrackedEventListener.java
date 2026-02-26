@@ -24,8 +24,11 @@ public class TrackedEventListener {
     public void handleTrackedEvent(TrackedEvent event) throws IOException {
         String taskId = event.getTaskId();
 
+        //statusStore.setStatus(taskId, TaskStatus.RUNNING);
         statusStore.addStatus(taskId, TaskStatus.RUNNING);
+
         System.out.println("Processing task " + taskId);
+        // set working process from llama source
 
         Thread thread = new Thread(() -> {
             try {
@@ -37,11 +40,23 @@ public class TrackedEventListener {
 
                 System.out.println("Task " + taskId + " completed.");
             } catch (IOException e) {
+                statusStore.setStatus(taskId, TaskStatus.FAILED);
                 Thread.currentThread().interrupt();
                 throw new RuntimeException(e);
             }
         });
 
+        //OllamaReader ollamaReader = new OllamaReader(event.getTaskPrompt().getPrompt());
+
+        // need to create a thread to run async the ollama execution
+        // on the other way, it pauses until the ollama execution is finished
+
         thread.start();
+
+//      Thread.sleep(100); // Simulate long task
+
+//      event.getTaskPrompt().setResponse(ollamaReader.response);
+//      promptStore.setPrompt(taskId, event.getTaskPrompt());
+//      statusStore.setStatus(taskId, TaskStatus.COMPLETED);
     }
 }
