@@ -1,4 +1,4 @@
-$json="{""model"":""llama3"",""prompt"":""Buenos días, ¿Cómo funciona la IA? Me lo puedes explicar brevemente."",""stream"":false}"
+$json="{""model"":""llama3"",""prompt"":""%%PROMPT%%"",""stream"":false}"
 
 $params=@{
 	Uri     = 'http://127.0.0.1:11434/api/generate'
