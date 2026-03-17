@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import static com.ollama.ollama.component.ApplicationProperties.AppName;
 import static java.lang.ProcessBuilder.startPipeline;
+
+import com.ollama.ollama.error.ShellExecutionException;
 import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class OllamaReader {
     public String prompt;
     public List<String> response;
 
-    public OllamaReader(String prompt) throws IOException {
+    public OllamaReader(String prompt) throws RuntimeException, IOException {
         String path = new File(".").getAbsolutePath();
 
         String appNameDir = "\\" + AppName + "\\";
@@ -28,20 +30,9 @@ public class OllamaReader {
         String currentPath = path.substring(0, index + appNameDir.length());
         String filePath = currentPath + psScript;
 
-        // restore psScript from template script
-        Files.copy(
-                Paths.get(
-                        filePath.replace(psScript, psTemplateScript)
-                ),
-                Paths.get(
-                        filePath
-                ),
-                StandardCopyOption.REPLACE_EXISTING
-        );
-
-        this.replaceInFile(
-                filePath,
-                "%%PROMPT%%",
+        String commandPs = String.format(
+                "\"[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; powershell -File '%s' -Z '%s'\"",
+                psTemplateScript,
                 prompt
         );
 
@@ -51,8 +42,8 @@ public class OllamaReader {
                         "-ExecutionPolicy",
                         "Bypass",
                         "-Command",
-                        "\"[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; powershell -File .\\ollama.ps1\""
-                );
+                        commandPs
+            );
 
         pbuilder.directory(new File(currentPath)); // set working directory to run this command
         pbuilder.redirectErrorStream(false); // keep stdout and stderr separate
@@ -65,71 +56,87 @@ public class OllamaReader {
         List<String> response = new ArrayList<>(new ArrayList<>(List.of()));
 
         try {
-            try (BufferedReader stdOut = new BufferedReader(
-                    new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
+            try (
+                 BufferedReader stdOut = new BufferedReader(
+                    new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8)
+                 );
                  BufferedReader stdErr = new BufferedReader(
-                         new InputStreamReader(process.getErrorStream(), StandardCharsets.UTF_8))) {
-
+                    new InputStreamReader(process.getErrorStream(), StandardCharsets.UTF_8)
+                 )
+            ) {
                 String text;
 
                 String line;
                 System.out.println("----- OUTPUT -----");
 
-                while ((text = stdOut.readLine()) != null) {
-                    int positionStart = text.indexOf("response", 0);
+                boolean isReadingResponse = false;
 
-                    if (positionStart != -1) {
-                        //int positionEnd = text.indexOf(",\"done\":", positionStart) + ": ".length();
-                        int positionEnd = text.indexOf(": ", positionStart) + ": ".length();
+                while ((text = stdOut.readLine()) != null) {
+                    int positionStart = text.indexOf("response", 0); // from the beginning
+                    int positionEnd = 0;
+
+                    if (positionStart == 0) { // should be at first position of the string
+                        isReadingResponse = true;
+                        positionEnd = text.indexOf(": ", positionStart + "response".length());
 
                         if (positionEnd != -1) {
                             String str = text.substring(
-                                    //positionStart + "\"response\":".length(),
-                                    //positionEnd - ",".length()
-                                    //positionStart + "response".length(),
-                                    //positionEnd - "".length()
-                                    positionEnd
+                                    positionEnd + ": ".length()
                             ).replaceAll(
                                     "(^\")|(\",$)",
                                     ""
-                            ); // this last replaceAll removes single quote from the
+                            );
+                            // this last replaceAll removes single quote from the
                             // beginning and end of string
 
-                            if (!str.isEmpty()) {
+                            if (!str.isEmpty()) { // string should have content before adding to response
                                 response.add(str);
                             }
                         }
                     } else {
-
-                        String ending = "done                 : ";
+                        String ending = "done";
                         positionStart = text.indexOf(ending, 0);
 
-                        if (positionStart != -1) {
-                            break; // exit for
-                        } else {
+                        if (positionStart == 0) { // should be at first position of the string
+                            break; // exit for // reading of response is finished
+                        } else if (isReadingResponse) {
                             positionStart = 0;
+
                             String str = text.substring(
                                     positionStart
                             ).replaceAll(
                                     "(^\")|(\",$)",
                                     ""
-                            ); // this last replaceAll removes single quote from the
+                            );
+                            // this last replaceAll removes single quote from the
                             // beginning and end of string
 
-                            str = StringUtils.stripEnd(str, " ");
-                            if (!str.isEmpty()) { response.add(str); }
+                            str = StringUtils.strip(str, " "); // remove spaces from both sides
+                            if (!str.isEmpty()) { // string should have content before adding to response
+                                response.add(str);
+                            }
                         }
                     }
                 } // exit while
 
-                if (response.isEmpty()) {
-                    response.add("There is not response.");
-                }
-
                 System.out.println("------ ERRORS ------");
+
+                boolean errorFound = false;
+                List<String> errorDescription= new ArrayList<>(new ArrayList<>(List.of()));
 
                 while ((line = stdErr.readLine()) != null) {
                     System.err.println(line);
+
+                    errorFound = true;
+                    errorDescription.add(line);
+                }
+
+                if (errorFound) {
+                    response.add("Sorry. Response could be reached by AI. An error occurred.");
+                    throw new ShellExecutionException(String.join("\n", errorDescription));
+                }
+                else if (response.isEmpty()) {
+                    response.add("There is not response.");
                 }
             } // exit try
 
@@ -152,22 +159,5 @@ public class OllamaReader {
         Reader isr = new InputStreamReader(inputStream);
         BufferedReader r = new BufferedReader(isr);
         return r.lines().toList();
-    }
-
-    private void replaceInFile(String filePath, String target, String replacement) throws IOException {
-        Path path = Paths.get(filePath);
-
-        if (!Files.exists(path)) {
-            throw new IOException("File not found: " + filePath);
-        }
-
-        Files.writeString(
-                path,
-                Files
-                        .readString(path, StandardCharsets.UTF_8)
-                        .replace(target, replacement),
-                StandardCharsets.UTF_8,
-                StandardOpenOption.TRUNCATE_EXISTING
-        );
     }
 }

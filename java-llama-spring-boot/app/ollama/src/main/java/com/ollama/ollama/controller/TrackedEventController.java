@@ -42,32 +42,30 @@ public class TrackedEventController {
         String url = "/public/home";
         String prompt;
 
-        //prompt = "Hello";
-        //if (!this.checkExist(prompt)) {
-        //    this.addPrompt(model, prompt);
-        //}
-
-        //prompt = "Hi";
-        //if (!this.checkExist(prompt)) {
-        //    this.addPrompt(model, prompt);
-        //}
-
-        //fixing latin encoding
-        //response is not correct. weird characters appears.
-        prompt = "Buenos días, ¿Cómo funciona la IA? Me lo puedes explicar brevemente.";
+        prompt = "Hello";
         if (!this.checkExist(prompt)) {
             this.addPrompt(model, prompt);
         }
 
-        //prompt = "Guten Tag, mein Freund";
-        //if (!this.checkExist(prompt)) {
-        //    this.addPrompt(model, prompt);
-        //}
+        prompt = "Buenos días, ¿Cómo estás?.";
+        if (!this.checkExist(prompt)) {
+            this.addPrompt(model, prompt);
+        }
 
-        //prompt = "Tell me who is it?";
-        //if (!this.checkExist(prompt)) {
-        //    this.addPrompt(model, prompt);
-        //}
+        prompt = "Guten Tag, mein Freund";
+        if (!this.checkExist(prompt)) {
+            this.addPrompt(model, prompt);
+        }
+
+        prompt = "Tell me who is it?";
+        if (!this.checkExist(prompt)) {
+            this.addPrompt(model, prompt);
+        }
+
+        prompt = "Como vai?";
+        if (!this.checkExist(prompt)) {
+            this.addPrompt(model, prompt);
+        }
 
         this.updateData();
         this.loadPrompts(model);
