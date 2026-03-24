@@ -187,7 +187,68 @@ $headersVariable="{0}{1}{2}" -f  $headers.name, $chars.equal, $headers.value
 
 $command="{0}{1}{2}{3}{4}{5};{6};{7};{8}{9};{10}" -f $chars.dolar, $params.name, $chars.equal, $chars.at, $chars.braceOpen, $uriVariable, $methodVariable, $headersVariable, $bodyVariable, $chars.braceClose, $commandInvoke
 
+# overwrite variable to test -- ran successfully
+# overwrite variable to test -- ran successfully -- try II
+$command="{0}{1}{2}{3}{4}{5};{6};{7};{8}{9};
+
+{10}{11};
+
+{12};
+" -f $chars.dolar, $params.name, $chars.equal, $chars.at, $chars.braceOpen, $uriVariable, $methodVariable, $headersVariable, $bodyVariable, $chars.braceClose, $chars.dolar, $params.name,
+
+$commandInvoke
+
+$tryBegin="try {0}" -f $chars.braceOpen
+
+$tryEnd="{0} catch {1}
+    Write-Output {2}{3}{4}An error occurred{5}{6}{7}{8};
+
+    Write-Output {9}{10}{11}Exception{12}Message;
+
+    {13}errorCode {14} {15}1;
+{16}
+" -f $chars.braceClose,
+
+#catch {1}
+#Write-Output {2}{3}An error occurred{4}{5}{6}
+#Write-Output {7}{8}{00}Exception{9}Message
+$chars.braceOpen,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
+
+$chars.colon,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
+
+$chars.dolar,
+$chars.underscore,
+$chars.period,
+$chars.period,
+
+#{10}errorCode {11} {12}1
+#$chars.dolar, $chars.equal, $chars.hyphen
+
+# overwrite command
+$chars.dolar,
+
+$chars.equal,
+$chars.hyphen,
+
+$chars.braceClose
+
 #--- -----
+$command="{0}
+    {1}
+{2}" -f $tryBegin, $command , $tryEnd
+
+Write-Output $command
+
+Powershell -Command $command
+Exit
 
 Powershell -Command $command
 Exit
