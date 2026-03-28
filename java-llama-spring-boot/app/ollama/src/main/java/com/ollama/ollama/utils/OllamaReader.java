@@ -2,11 +2,10 @@ package com.ollama.ollama.utils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import static com.ollama.ollama.component.ApplicationProperties.AppName;
+import static com.ollama.ollama.application.ApplicationProperties.AppName;
 import static java.lang.ProcessBuilder.startPipeline;
 
 import com.ollama.ollama.error.ShellExecutionException;
@@ -32,7 +31,7 @@ public class OllamaReader {
         String filePath = currentPath + psScript;
 
         String commandPs = String.format(
-                "\"[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; powershell -File '%s' -Z '%s'\"",
+                "\"[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; powershell -File '%s' -UserPrompt '%s'\"",
                 psTemplateScript,
                 prompt
         );

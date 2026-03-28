@@ -35,9 +35,6 @@
     <input type="submit" value="Go" />
 </form> -->
 
-<!-- iteration was removed to test post method-->
-<!-- th:each="item: #" -->
-
 <section th:each="item: ${data}">
     <p>TaskId: [[${item.taskId}]]</p>
     <p th:if="${not #strings.isEmpty(item.prompt)}">Prompt: [[${item.prompt}]]</p>

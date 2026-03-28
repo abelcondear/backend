@@ -35,9 +35,80 @@ public class TrackedEventController {
         //this.model = model;
     }
 
-    @GetMapping("/home")
-    public String home(Model model) {
+//    @GetMapping("/home")
+//    public String home(Model model) {
+//        this.model = model;
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
+//
+//        String url = "/public/home";
+//        String prompt;
+//
+//        prompt = "Hello";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Buenos días, ¿Cómo estás?.";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Guten Tag, mein Freund";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Tell me who is it?";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Como vai?";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        this.updateData();
+//        this.loadPrompts(this.model);
+//
+//        return url;
+//    }
+
+    @PostMapping("/home")
+    public String handleForm(
+            @PathVariable("editPromptES") @RequestParam("editPromptES") String editPromptES,
+            Model model) {
+        // service was temporally removed
+//        System.out.println();
+//        System.out.printf("editPromptES: %s", editPromptES);
+//        System.out.println();
+//
+//        this.model = model;
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
+//
+//        String url = "/public/home";
+//        String prompt;
+//
+//        // prompt received successfully by POST method
+//        prompt = editPromptES;
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+
+//      ----------------------------------
+//      testing same method implemented above
+//      using POST method
+//      ----------------------------------
+
         this.model = model;
+
+        System.out.println();
+        System.out.printf("editPromptES: %s", editPromptES);
+        System.out.println();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
@@ -45,44 +116,55 @@ public class TrackedEventController {
         String url = "/public/home";
         String prompt;
 
-        prompt = "Hello";
+//        prompt = "Hello";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+        //prompt = "Buenos días, ¿Cómo estás?.";
+        prompt = editPromptES;
         if (!this.checkExist(prompt)) {
             this.addPrompt(this.model, prompt);
         }
 
-        prompt = "Buenos días, ¿Cómo estás?.";
-        if (!this.checkExist(prompt)) {
-            this.addPrompt(this.model, prompt);
-        }
-
-        prompt = "Guten Tag, mein Freund";
-        if (!this.checkExist(prompt)) {
-            this.addPrompt(this.model, prompt);
-        }
-
-        prompt = "Tell me who is it?";
-        if (!this.checkExist(prompt)) {
-            this.addPrompt(this.model, prompt);
-        }
-
-        prompt = "Como vai?";
-        if (!this.checkExist(prompt)) {
-            this.addPrompt(this.model, prompt);
-        }
+//        prompt = "Guten Tag, mein Freund";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Tell me who is it?";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
+//
+//        prompt = "Como vai?";
+//        if (!this.checkExist(prompt)) {
+//            this.addPrompt(this.model, prompt);
+//        }
 
         this.updateData();
         this.loadPrompts(this.model);
 
-        return url;
-        //return this.handleUrlRequest(this.model);
-    }
+//      ------------------------------------
+//      code already tested and commented (out of execution)
+//      ------------------------------------
+        // this is for testing purpose. -testing POST method
+//        Map<String, String> d = new HashMap<>();
+//
+//        d.put("taskId", UUID.randomUUID().toString());
+//
+//        data.add(d);
+//
+//        data.getFirst().put("prompt", this.decodeEncoding(prompt));
+//        data.getFirst().put("response", this.decodeEncoding(""));
+//        data.getFirst().put("error", this.decodeEncoding(""));
+//        data.getFirst().put("status", this.translate(TaskStatus.PENDING));
+//
+//        model.addAttribute("data", data);
 
-    @PostMapping("/home")
-    public String handleForm(@RequestParam("editPromptES") String editPromptES) {
-        String url = "/public/home";
-        System.out.printf("editPromptES: %s", editPromptES);
+        // end testing
+
         return url;
-        //return this.handleUrlRequest(this.model);
     }
 
 //    private String handleUrlRequest(Model model){
@@ -182,7 +264,7 @@ public class TrackedEventController {
                                         ).replace(
                                                 "\\", ""
                                         );
-                    String strError = promptStore.readPrompt(taskId).getResponse()
+                    String strError = promptStore.readPrompt(taskId).getError()
                             .isEmpty() ?
                             "":
                             String.join(
@@ -197,22 +279,6 @@ public class TrackedEventController {
                     data.get(index).put("prompt", this.decodeEncoding(strPrompt));
                     data.get(index).put("response", this.decodeEncoding(strResponse));
                     data.get(index).put("error", this.decodeEncoding(strError));
-
-//                    data.get(index).put("response",
-//                            promptStore.readPrompt(taskId).getResponse().isEmpty() ?
-//                            "":
-//                            String.join(
-//                                " ",
-//                                promptStore.readPrompt(taskId).getResponse()
-//                            ).replace(
-//                                    "\n", "<br/>"
-//                            ).replace(
-//                                    "\n\n", "<br/><br/>"
-//                            ).replace(
-//                                    "\"", "&quot;"
-//                            )
-//                    );
-
                     data.get(index).put("status", this.translate(statusStore.readStatus(taskId)));
                 }
 
@@ -259,6 +325,16 @@ public class TrackedEventController {
             statusStore.setStatus(taskId, TaskStatus.FAILED);
             Thread.currentThread().interrupt();
 
+            List<String> message = new ArrayList<>(){};
+            message.add(e.getMessage());
+
+            promptStore.getPrompt(taskId).setError(message);
+
+            model.addAttribute("taskId", taskId);
+            model.addAttribute("status", statusStore.readStatus(taskId));
+
+            this.updateData();
+
             model.addAttribute("message", e.getMessage());
             url = "/error/common";
         }
@@ -284,6 +360,26 @@ public class TrackedEventController {
 
                 url = "/public/response";
             } catch (RuntimeException e) {
+                List<String> message = new ArrayList<>(){};
+                message.add(e.getMessage());
+
+                //promptStore.getPrompt(taskId).setError(message);
+
+                //List<String> message = new ArrayList<>(){};
+                //message.add(e.getMessage());
+
+                promptStore.getPrompt(taskId).setError(message);
+                this.updateData();
+
+                model.addAttribute("taskId", taskId);
+                model.addAttribute("status", statusStore.readStatus(taskId));
+
+                model.addAttribute("prompt", promptStore.readPrompt(taskId).getPrompt());
+                model.addAttribute("response", "");
+
+                model.addAttribute("error", String.join(" ", promptStore.readPrompt(taskId).getError()).replace("\n",
+                        "<br/>"));
+
                 url = "/error";
             }
         }
