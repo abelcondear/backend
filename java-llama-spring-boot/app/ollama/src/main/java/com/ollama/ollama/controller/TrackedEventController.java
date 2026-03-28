@@ -35,14 +35,14 @@ public class TrackedEventController {
         //this.model = model;
     }
 
-//    @GetMapping("/home")
-//    public String home(Model model) {
-//        this.model = model;
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
-//
-//        String url = "/public/home";
+    @GetMapping("/home")
+    public String home(Model model) {
+        this.model = model;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
+
+        String url = "/public/home";
 //        String prompt;
 //
 //        prompt = "Hello";
@@ -70,16 +70,21 @@ public class TrackedEventController {
 //            this.addPrompt(this.model, prompt);
 //        }
 //
-//        this.updateData();
-//        this.loadPrompts(this.model);
-//
-//        return url;
-//    }
+        this.updateData();
+        this.loadPrompts(this.model);
+
+        return url;
+    }
 
     @PostMapping("/home")
     public String handleForm(
+            @PathVariable("editPromptEN") @RequestParam("editPromptEN") String editPromptEN,
             @PathVariable("editPromptES") @RequestParam("editPromptES") String editPromptES,
-            Model model) {
+            @PathVariable("editPromptFR") @RequestParam("editPromptFR") String editPromptFR,
+            @PathVariable("editPromptDT") @RequestParam("editPromptDT") String editPromptDT,
+            @PathVariable("editPromptPT") @RequestParam("editPromptPT") String editPromptPT,
+            Model model
+    ) {
         // service was temporally removed
 //        System.out.println();
 //        System.out.printf("editPromptES: %s", editPromptES);
@@ -109,6 +114,14 @@ public class TrackedEventController {
         System.out.println();
         System.out.printf("editPromptES: %s", editPromptES);
         System.out.println();
+        System.out.printf("editPromptEN: %s", editPromptEN);
+        System.out.println();
+        System.out.printf("editPromptPT: %s", editPromptPT);
+        System.out.println();
+        System.out.printf("editPromptDT: %s", editPromptDT);
+        System.out.println();
+        System.out.printf("editPromptFR: %s", editPromptFR);
+        System.out.println();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         this.model.addAttribute("currentDate", LocalDateTime.now().format(formatter));
@@ -116,31 +129,35 @@ public class TrackedEventController {
         String url = "/public/home";
         String prompt;
 
-//        prompt = "Hello";
-//        if (!this.checkExist(prompt)) {
-//            this.addPrompt(this.model, prompt);
-//        }
+        //prompt = "Hello";
+        prompt = editPromptEN;
+        if (!prompt.isEmpty() && !this.checkExist(prompt)) {
+            this.addPrompt(this.model, prompt);
+        }
 //
         //prompt = "Buenos días, ¿Cómo estás?.";
         prompt = editPromptES;
-        if (!this.checkExist(prompt)) {
+        if (!prompt.isEmpty() && !this.checkExist(prompt)) {
             this.addPrompt(this.model, prompt);
         }
 
-//        prompt = "Guten Tag, mein Freund";
-//        if (!this.checkExist(prompt)) {
-//            this.addPrompt(this.model, prompt);
-//        }
-//
-//        prompt = "Tell me who is it?";
-//        if (!this.checkExist(prompt)) {
-//            this.addPrompt(this.model, prompt);
-//        }
-//
-//        prompt = "Como vai?";
-//        if (!this.checkExist(prompt)) {
-//            this.addPrompt(this.model, prompt);
-//        }
+        //prompt = "Guten Tag, mein Freund";
+        prompt = editPromptDT;
+        if (!prompt.isEmpty() && !this.checkExist(prompt)) {
+            this.addPrompt(this.model, prompt);
+        }
+
+        //prompt = "Vous ...?";
+        prompt = editPromptFR;
+        if (!prompt.isEmpty() && !this.checkExist(prompt)) {
+            this.addPrompt(this.model, prompt);
+        }
+
+        //prompt = "Como vai?";
+        prompt = editPromptPT;
+        if (!prompt.isEmpty() && !this.checkExist(prompt)) {
+            this.addPrompt(this.model, prompt);
+        }
 
         this.updateData();
         this.loadPrompts(this.model);
@@ -206,6 +223,8 @@ public class TrackedEventController {
 //    }
 
     private void addPrompt(Model model, String prompt) {
+        if (prompt.isEmpty()) { return; }
+
         prompts.add(prompt);
 
         String taskId = service.triggerTrackedEvent(prompt);

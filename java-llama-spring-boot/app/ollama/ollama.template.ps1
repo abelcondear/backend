@@ -54,9 +54,7 @@ param(
 
 #---------- -
 
-$chars=@{quote='"';singleQuote='''';equal='=';colon=':';braceOpen="{";braceClose="}";comma=',';dolar='$';
-semicolon=';';at='@';period='.';hyphen='-';underscore='_';parenthesisOpen="(";parenthesisClose=")";
-squareBracketsOpen="[";squareBracketsClose="]";}
+$chars=@{quote='"';singleQuote='''';equal='=';colon=':';braceOpen="{";braceClose="}";comma=',';dolar='$'; semicolon=';';at='@';period='.';hyphen='-';underscore='_';parenthesisOpen="(";parenthesisClose=")"; squareBracketsOpen="[";squareBracketsClose="]";lessThan="<";greaterThan=">";}
 
 #---------- -
 
@@ -344,12 +342,27 @@ $tryBegin="try {0}" -f $chars.braceOpen
 
 #throw {8}System.Exception{9}{10}{11}new{12} {13}errorMessage{14};
 
-$tryEnd="{0} catch {1}
-    {2}errorMessage{3}{4}{5}{6}Exception{7}Message;
+#$tryEnd="{0} catch {1}
+#    {2}errorMessage{3}{4}{5}{6}Exception{7}Message;
 
-    throw {8}System.Exception{9}{10}{11}new{12}{13}errorMessage{14};
-{15}
+#throw {8}System.Exception{9}{10}{11}new{12}{13}errorMessage{14};
+#{15}
+#" -f $chars.braceClose,
+
+
+$tryEnd="{0} catch {1}
+    {2}errorMessage{3}{4}String{5}{6}{7}Concat{8}
+    {9}{10}{11}{12}{13}{14}{15}{16}{17},
+    {18}{19}{20}Exception{21}Message,
+    {22}{23}{24}{25}{26}{27}{28}{29}{30}
+    {31};
+
+    throw {32}System.Exception{33}{34}{35}new{36}{37}errorMessage{38};
+{39}
 " -f $chars.braceClose,
+
+#[string]::Concat($string1, $string2)
+
 
 #catch {1}
 #Write-Output {2}{3}An error occurred{4}{5}{6}
@@ -359,14 +372,57 @@ $tryEnd="{0} catch {1}
 #{0} catch {1}
 $chars.braceOpen,
 
-#{2}errorMessage{3}{4}{5}{6}Exception{7}Message;
+###old one. discarded
+###{2}errorMessage{3}{4}{5}{6}Exception{7}Message;
+
+#{2}errorMessage{3}{4}{5}{6}{7}Concat{8}
+#{9}{10}{11}{12}{13}{14}{15}{16}{17},
+#{18}{19}{20}Exception{21}Message,
+#{22}{23}{24}{25}{26}{27}{28}{29}{30},
+#{31};
+
 $chars.dolar,
 $chars.equal,
+
+$chars.squareBracketsOpen,
+$chars.squareBracketsClose,
+
+$chars.colon,
+$chars.colon,
+
+$chars.parenthesisOpen,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
+
+$chars.lessThan,
+$chars.lessThan,
+$chars.lessThan,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
 
 $chars.dolar,
 $chars.underscore,
 $chars.period,
 $chars.period,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
+
+$chars.greaterThan,
+$chars.greaterThan,
+$chars.greaterThan,
+
+$chars.quote,
+$chars.quote,
+$chars.quote,
+
+$chars.parenthesisClose,
+
 
 # ommitted
 #throw [System.Exception]::new("Custom error: Value cannot be zero.")
@@ -377,8 +433,10 @@ $chars.period,
 # using index parameters
 #throw {13}System.Exception{14}{15}{16}new({17}{18}{19} {00000} {20} {21}{19}{20}{21})
 
+# deprecated
 #throw {8}System.Exception{9}{10}{11}new{12}{13}errorMessage{14};
 
+#throw {32}System.Exception{33}{34}{35}new{36}{37}errorMessage{38};
 $chars.squareBracketsOpen,
 $chars.squareBracketsClose,
 
@@ -391,6 +449,8 @@ $chars.dolar,
 
 $chars.parenthesisClose,
 
+###{15}
+#{39}
 $chars.braceClose
 
 #Write-Output $tryEnd

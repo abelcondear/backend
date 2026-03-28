@@ -134,11 +134,19 @@ public class OllamaReader {
                 if (errorFound) {
                     Thread.currentThread().interrupt();
                     error.add("Sorry. Response could not be reached by AI.");
+                    String errDescription = String.join(
+                            "\n",
+                            errorDescription
+                    );
+
+                    int startPosition = errDescription.indexOf("<<<");
+                    int endPosition = errDescription.indexOf(
+                            ">>>",
+                            startPosition + "<<<".length()
+                    );
+
                     throw new ShellExecutionException(
-                            String.join(
-                                    "\n",
-                                    errorDescription
-                            )
+                            errDescription.substring(startPosition + "<<<".length(), endPosition)
                     );
                 }
                 else if (response.isEmpty()) {

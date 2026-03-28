@@ -27,8 +27,6 @@ public class TrackedEventService {
     }
 
     public String triggerTrackedEvent(String prompt) {
-        // avoid temporally the execution to test post method
-
         this.taskId = UUID.randomUUID().toString();
 //        // //String taskId = UUID.randomUUID().toString();
         TaskPrompt taskPrompt = new TaskPrompt();
