@@ -1,3 +1,0 @@
-/home/scott/Documents/Me/Programs/backend/c++/readMarket/build/CMakeFiles/readMarket.dir
-/home/scott/Documents/Me/Programs/backend/c++/readMarket/build/CMakeFiles/edit_cache.dir
-/home/scott/Documents/Me/Programs/backend/c++/readMarket/build/CMakeFiles/rebuild_cache.dir
