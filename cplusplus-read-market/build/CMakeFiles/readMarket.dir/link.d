@@ -35,6 +35,10 @@ readMarket: \
   /usr/lib/gcc/x86_64-linux-gnu/15/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/15/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/crtn.o \
+  /usr/lib/x86_64-linux-gnu/libnuma.so.1 \
+  /usr/lib/x86_64-linux-gnu/libcpuinfo.so.0 \
+  /usr/lib/x86_64-linux-gnu/libm.so.6 \
+  /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/x86_64-linux-gnu/libfmt.so.10 \
   /usr/lib/x86_64-linux-gnu/libcpp-httplib.so.0.26 \
   /usr/lib/x86_64-linux-gnu/libprotobuf.so \
@@ -48,15 +52,11 @@ readMarket: \
   /usr/lib/x86_64-linux-gnu/liblapack.so.3 \
   /usr/lib/x86_64-linux-gnu/libdnnl.so.3.6 \
   /usr/lib/x86_64-linux-gnu/libsleef.so.3 \
-  /usr/lib/x86_64-linux-gnu/libm.so.6 \
   /usr/lib/x86_64-linux-gnu/libz.so.1 \
   /usr/lib/x86_64-linux-gnu/libzstd.so.1 \
   /usr/lib/x86_64-linux-gnu/libpthreadpool.so.0 \
   /usr/lib/x86_64-linux-gnu/libgomp.so.1 \
-  /usr/lib/x86_64-linux-gnu/libc10.so \
-  /usr/lib/x86_64-linux-gnu/libcpuinfo.so.0 \
   /usr/lib/x86_64-linux-gnu/libmpi.so.40 \
-  /lib64/ld-linux-x86-64.so.2 \
   /usr/lib/x86_64-linux-gnu/libssl.so.3 \
   /usr/lib/x86_64-linux-gnu/libcrypto.so.3 \
   /usr/lib/x86_64-linux-gnu/libbrotlidec.so.1 \
@@ -66,7 +66,6 @@ readMarket: \
   /usr/lib/x86_64-linux-gnu/libibverbs.so.1 \
   /usr/lib/x86_64-linux-gnu/libgfortran.so.5 \
   /usr/lib/x86_64-linux-gnu/libmvec.so.1 \
-  /usr/lib/x86_64-linux-gnu/libnuma.so.1 \
   /usr/lib/x86_64-linux-gnu/libucc.so.1 \
   /usr/lib/x86_64-linux-gnu/libpsm2.so.2 \
   /usr/lib/x86_64-linux-gnu/libfabric.so.1 \
@@ -159,6 +158,14 @@ CMakeFiles/readMarket.dir/readMarket.cpp.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/15/../../../x86_64-linux-gnu/crtn.o:
 
+/usr/lib/x86_64-linux-gnu/libnuma.so.1:
+
+/usr/lib/x86_64-linux-gnu/libcpuinfo.so.0:
+
+/usr/lib/x86_64-linux-gnu/libm.so.6:
+
+/lib64/ld-linux-x86-64.so.2:
+
 /usr/lib/x86_64-linux-gnu/libfmt.so.10:
 
 /usr/lib/x86_64-linux-gnu/libcpp-httplib.so.0.26:
@@ -185,8 +192,6 @@ CMakeFiles/readMarket.dir/readMarket.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libsleef.so.3:
 
-/usr/lib/x86_64-linux-gnu/libm.so.6:
-
 /usr/lib/x86_64-linux-gnu/libz.so.1:
 
 /usr/lib/x86_64-linux-gnu/libzstd.so.1:
@@ -195,13 +200,7 @@ CMakeFiles/readMarket.dir/readMarket.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libgomp.so.1:
 
-/usr/lib/x86_64-linux-gnu/libc10.so:
-
-/usr/lib/x86_64-linux-gnu/libcpuinfo.so.0:
-
 /usr/lib/x86_64-linux-gnu/libmpi.so.40:
-
-/lib64/ld-linux-x86-64.so.2:
 
 /usr/lib/x86_64-linux-gnu/libssl.so.3:
 
@@ -220,8 +219,6 @@ CMakeFiles/readMarket.dir/readMarket.cpp.o:
 /usr/lib/x86_64-linux-gnu/libgfortran.so.5:
 
 /usr/lib/x86_64-linux-gnu/libmvec.so.1:
-
-/usr/lib/x86_64-linux-gnu/libnuma.so.1:
 
 /usr/lib/x86_64-linux-gnu/libucc.so.1:
 
