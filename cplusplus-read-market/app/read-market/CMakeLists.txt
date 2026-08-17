@@ -10,12 +10,16 @@ execute_process(
 execute_process(
    COMMAND cp ./readMarket.cpp ./build/
    COMMAND cp ./apple-inc-appl.csv ./build/
+   COMMAND cp ./aes-cotizaciones-historicas.csv ./build/
 )
+
+find_package(Boost REQUIRED)
 
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
 add_executable(readMarket readMarket.cpp)
+
 target_link_libraries(readMarket "${TORCH_LIBRARIES}")
 set_property(TARGET readMarket PROPERTY CXX_STANDARD 20)
 
