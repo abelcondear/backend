@@ -3,8 +3,10 @@
 
 
 #include <stdio.h>
+
 #include <torch/torch.h>
 #include <torch/script.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -19,10 +21,13 @@
 #include <array>
 #include <unistd.h>
 #include <sys/wait.h>
+
 #include <filesystem>
 #include <boost/filesystem.hpp>
+
 #include <iomanip>
 #include <ctime>
+
 
 
 std::string trim(const std::string& str) {
@@ -35,11 +40,12 @@ std::string trim(const std::string& str) {
 
     return str.substr(start, end - start + 1);
 }
+
+
 bool testConvertFloat(std::string value) {
         bool result;
 
         try {
-                // convert string to float
                 float val = std::stof(value);
                 result = true;
         }

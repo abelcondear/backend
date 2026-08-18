@@ -6,6 +6,25 @@
 #include <stdio.h>
 #include <fstream>
 #include <cstring>
+#include <sstream>
+#include <vector>
+
+// ----------------------------------------
+
+std::vector<std::string> split(const std::string &str, char delim) {
+	std::vector<std::string> tokens;
+	std::string token;
+	std::stringstream ss(str);
+
+	while (getline(ss, token, delim)) {
+		tokens.push_back(token);
+	}
+
+	return tokens;
+}
+
+// ----------------------------------------
+
 
 // ----------------------------------------
 
@@ -20,7 +39,7 @@ int main(int argc, char** argv) {
 
 
     // ----------------------------------------
-    // chars configuration - BEGIN
+    // characters configuration - BEGIN
 
     char slash = 47; // "/" slash
     char quote = 34; // '"' quote
@@ -31,7 +50,7 @@ int main(int argc, char** argv) {
     char formfeed = 12; // form feed
     char creturn = 13; // carriage return
 
-    // chars configuration - END
+    // characters configuration - END
     // ----------------------------------------
 
 
@@ -46,9 +65,42 @@ int main(int argc, char** argv) {
     // ----------------------------------------
     // parameters from command line - BEGIN
 
-    int amount_tensor = std::stoi(argv[1]); // amount of tensors
-    char delimiter = *argv[2]; // character delimiter
-    char* pathFile = argv[3]; // path input-file
+    int amount_tensor = 0; // amount of tensors
+    char delimiter = 0; // delimiter character
+    char* pathFile = 0; // path input-file
+
+    std::string text = argv[1];
+    std::vector<std::string> result = split(text, '=');
+
+    if (result[0].compare("--amount") == 0) {
+	amount_tensor = std::stoi(result[1]);
+    }
+
+    text = argv[2];
+    result = split(text, '=');
+
+    if (result[0].compare("--delimiter") == 0) {
+  	delimiter = result[1].front();
+    }
+
+    text = argv[3];
+    result = split(text, '=');
+
+    if (result[0].compare("--pathFile") == 0) {
+	char charArr[result[1].length() + 1];
+
+	std::copy(result[1].begin(), result[1].end(), charArr);
+	charArr[result[1].length()] = '\0';
+
+	pathFile = (char*) malloc(result[1].length() + 1);
+
+	strcpy(pathFile, charArr);
+    }
+
+    if (amount_tensor == 0 || delimiter == 0 || strlen(pathFile) == 0) {
+        std::cerr << "Error: No all parameters were specified." << std::endl;
+        return 1;
+    }
 
     // parameters from command line - END
     // ----------------------------------------
@@ -75,11 +127,13 @@ int main(int argc, char** argv) {
     // libraries - BEGIN
 
     outputFile << "#include <stdio.h>" << std::endl;
+    outputFile << std::endl;
 
     // ----------------------------------------
 
     outputFile << "#include <torch/torch.h>" << std::endl;
     outputFile << "#include <torch/script.h>" << std::endl;
+    outputFile << std::endl;
 
     // ----------------------------------------
 
@@ -97,16 +151,19 @@ int main(int argc, char** argv) {
     outputFile << "#include <array>" << std::endl;
     outputFile << "#include <unistd.h>" << std::endl;
     outputFile << "#include <sys/wait.h>" << std::endl;
+    outputFile << std::endl;
 
     // ----------------------------------------
 
     outputFile << "#include <filesystem>" << std::endl;
     outputFile << "#include <boost/filesystem.hpp>" << std::endl;
+    outputFile << std::endl;
 
     // ----------------------------------------
 
     outputFile << "#include <iomanip>" << std::endl;
     outputFile << "#include <ctime>" << std::endl;
+    outputFile << std::endl;
 
     // libraries - END
     // ----------------------------------------
@@ -153,6 +210,14 @@ int main(int argc, char** argv) {
     // ----------------------------------------
 
 
+    // --------------------------------------------------
+
+    outputFile << std::endl;
+    outputFile << std::endl;
+
+    // --------------------------------------------------
+
+
     // ----------------------------------------
     // function testConvertFloat - BEGIN
 
@@ -160,7 +225,6 @@ int main(int argc, char** argv) {
     outputFile << "        bool result;" << std::endl;
     outputFile << std::endl;
     outputFile << "        try {" << std::endl;
-    outputFile << "                " << slash << slash << " convert string to float" << std::endl;
     outputFile << "                float val = std::stof(value);" << std::endl;
     outputFile << "                result = true;" << std::endl;
     outputFile << "        }" << std::endl;
