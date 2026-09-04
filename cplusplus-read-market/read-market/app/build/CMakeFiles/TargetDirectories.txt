@@ -1,0 +1,3 @@
+/home/scott/Documents/Me/Download/new/backend/cplusplus-read-market/read-market/app/build/CMakeFiles/readMarket.dir
+/home/scott/Documents/Me/Download/new/backend/cplusplus-read-market/read-market/app/build/CMakeFiles/edit_cache.dir
+/home/scott/Documents/Me/Download/new/backend/cplusplus-read-market/read-market/app/build/CMakeFiles/rebuild_cache.dir
