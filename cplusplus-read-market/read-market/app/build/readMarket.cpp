@@ -137,7 +137,7 @@ CustomModel getModel(
      const int amountTensor
 ) {
      CustomModel model(
-             53, // columns-fixed
+             145, // columns-fixed
              values.size(),  // rows-fixed
              1  // 1 depth
      );
@@ -166,36 +166,104 @@ CustomModel getModel(
           close_column.push_back(close_value);
      }
 
-
-     for (int x = 0; x < open_column.size(); x ++) {
-
-          open_value = open_column[x];
-
-     std::cout
-     << "open_value="
-     << open_value
-     << std::endl;
-     }
-
-     std::cout << std::endl;
-     std::cout << std::endl;
-
-     for (int x = 0; x < close_column.size(); x ++) {
-
-          close_value = close_column[x];
-
-     std::cout
-     << "close_value="
-     << close_value
-     << std::endl;
-     }
-
      std::cout << std::endl;
      std::cout << std::endl;
 
 
      input_tensor = torch::tensor(
        {
+               open_column[144],
+               open_column[143],
+               open_column[142],
+               open_column[141],
+               open_column[140],
+               open_column[139],
+               open_column[138],
+               open_column[137],
+               open_column[136],
+               open_column[135],
+               open_column[134],
+               open_column[133],
+               open_column[132],
+               open_column[131],
+               open_column[130],
+               open_column[129],
+               open_column[128],
+               open_column[127],
+               open_column[126],
+               open_column[125],
+               open_column[124],
+               open_column[123],
+               open_column[122],
+               open_column[121],
+               open_column[120],
+               open_column[119],
+               open_column[118],
+               open_column[117],
+               open_column[116],
+               open_column[115],
+               open_column[114],
+               open_column[113],
+               open_column[112],
+               open_column[111],
+               open_column[110],
+               open_column[109],
+               open_column[108],
+               open_column[107],
+               open_column[106],
+               open_column[105],
+               open_column[104],
+               open_column[103],
+               open_column[102],
+               open_column[101],
+               open_column[100],
+               open_column[99],
+               open_column[98],
+               open_column[97],
+               open_column[96],
+               open_column[95],
+               open_column[94],
+               open_column[93],
+               open_column[92],
+               open_column[91],
+               open_column[90],
+               open_column[89],
+               open_column[88],
+               open_column[87],
+               open_column[86],
+               open_column[85],
+               open_column[84],
+               open_column[83],
+               open_column[82],
+               open_column[81],
+               open_column[80],
+               open_column[79],
+               open_column[78],
+               open_column[77],
+               open_column[76],
+               open_column[75],
+               open_column[74],
+               open_column[73],
+               open_column[72],
+               open_column[71],
+               open_column[70],
+               open_column[69],
+               open_column[68],
+               open_column[67],
+               open_column[66],
+               open_column[65],
+               open_column[64],
+               open_column[63],
+               open_column[62],
+               open_column[61],
+               open_column[60],
+               open_column[59],
+               open_column[58],
+               open_column[57],
+               open_column[56],
+               open_column[55],
+               open_column[54],
+               open_column[53],
                open_column[52],
                open_column[51],
                open_column[50],
@@ -262,6 +330,98 @@ CustomModel getModel(
 
      input_tensor = torch::tensor(
        {
+               close_column[144],
+               close_column[143],
+               close_column[142],
+               close_column[141],
+               close_column[140],
+               close_column[139],
+               close_column[138],
+               close_column[137],
+               close_column[136],
+               close_column[135],
+               close_column[134],
+               close_column[133],
+               close_column[132],
+               close_column[131],
+               close_column[130],
+               close_column[129],
+               close_column[128],
+               close_column[127],
+               close_column[126],
+               close_column[125],
+               close_column[124],
+               close_column[123],
+               close_column[122],
+               close_column[121],
+               close_column[120],
+               close_column[119],
+               close_column[118],
+               close_column[117],
+               close_column[116],
+               close_column[115],
+               close_column[114],
+               close_column[113],
+               close_column[112],
+               close_column[111],
+               close_column[110],
+               close_column[109],
+               close_column[108],
+               close_column[107],
+               close_column[106],
+               close_column[105],
+               close_column[104],
+               close_column[103],
+               close_column[102],
+               close_column[101],
+               close_column[100],
+               close_column[99],
+               close_column[98],
+               close_column[97],
+               close_column[96],
+               close_column[95],
+               close_column[94],
+               close_column[93],
+               close_column[92],
+               close_column[91],
+               close_column[90],
+               close_column[89],
+               close_column[88],
+               close_column[87],
+               close_column[86],
+               close_column[85],
+               close_column[84],
+               close_column[83],
+               close_column[82],
+               close_column[81],
+               close_column[80],
+               close_column[79],
+               close_column[78],
+               close_column[77],
+               close_column[76],
+               close_column[75],
+               close_column[74],
+               close_column[73],
+               close_column[72],
+               close_column[71],
+               close_column[70],
+               close_column[69],
+               close_column[68],
+               close_column[67],
+               close_column[66],
+               close_column[65],
+               close_column[64],
+               close_column[63],
+               close_column[62],
+               close_column[61],
+               close_column[60],
+               close_column[59],
+               close_column[58],
+               close_column[57],
+               close_column[56],
+               close_column[55],
+               close_column[54],
+               close_column[53],
                close_column[52],
                close_column[51],
                close_column[50],
@@ -320,7 +480,6 @@ CustomModel getModel(
      );
 
      input = model.forward(input_tensor);
-
 
 
 
@@ -455,12 +614,6 @@ CustomModel readCSV
 
                     value_ft_volume = std::stof(*it);
 
-                    std::cout << "----------" << std::endl;
-                    std::cout << date_str << std::endl;
-                    std::cout << value_ft_open << std::endl;
-                    std::cout << value_ft_close << std::endl;
-                    std::cout << "----------" << std::endl;
-
                     rowArr.push_back(
                          std::make_tuple(
                               date_str,
@@ -501,7 +654,7 @@ int main(int argc, char *argv[]) {
      const std::string paramPathFile = "./aes-cotizaciones-historicas.csv";
 
      const char paramDelimiter = ';';
-     const int paramAmountTensor = 53;
+     const int paramAmountTensor = 145;
 
 
      CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor);

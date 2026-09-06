@@ -24,7 +24,8 @@
 #
 #  --- create binary program  ---
 #  g++ readMarket.Generated.cpp -o readMarket.Generated
-#  ./readMarket.Generated --amount=53 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv"
+#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv"
+#
 #
 #  --- create binary program using parameter for Tensorflow library ---
 #  g++ readMarket.cpp -o readMarket -ltensorflow
@@ -34,7 +35,8 @@
 #  https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2604/x86_64/
 #
 #  --- open excel document ---
-#  xdg-open AES_Cotizaciones_Historicas.xls
+#  xdg-open aes-cotizaciones-historicas.xlsx
+#  soffice --safe-mode aes-cotizaciones-historicas.xlsx
 #
 # ---------------------------
 
