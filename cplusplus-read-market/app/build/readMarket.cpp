@@ -323,6 +323,11 @@ CustomModel getModel(
 
      input = model.forward(input_tensor);
 
+	std::cout << "tensor result for opening ..." << std::endl;
+	std::cout << input << std::endl;
+	std::cout << input_tensor << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+	std::cout << std::endl;
 
      std::cout << std::endl;
 
@@ -481,6 +486,11 @@ CustomModel getModel(
 
      input = model.forward(input_tensor);
 
+	std::cout << "tensor result for closing ..." << std::endl;
+	std::cout << input << std::endl;
+	std::cout << input_tensor << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+	std::cout << std::endl;
 
 
      return model;

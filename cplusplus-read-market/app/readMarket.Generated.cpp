@@ -429,7 +429,6 @@ int main(int argc, char** argv) {
     outputFile << "          close_column.push_back(close_value);" << std::endl;
     // ----
 
-
     // ----
 
     outputFile << "     }" << std::endl;
@@ -452,7 +451,6 @@ int main(int argc, char** argv) {
 
     // ---- ----------- ----
     // tensor::open_column - BEGIN
-
     // ----
     outputFile << "     input_tensor = torch::tensor(" << std::endl;
     outputFile << "       {" << std::endl;
@@ -478,6 +476,17 @@ int main(int argc, char** argv) {
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
 
+    outputFile
+	<< "	std::cout << "
+	<< quote << "tensor result for opening ..." << quote
+	<< " << std::endl;" << std::endl;
+    outputFile << "	std::cout << input << std::endl;" << std::endl;
+    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+    outputFile
+	<< "	std::cout << "
+	<< quote << "-----------------------------" << quote
+	<< " << std::endl;" << std::endl;
+    outputFile << "	std::cout << std::endl;" << std::endl;
 
     outputFile << std::endl;
     // ----
@@ -520,6 +529,18 @@ int main(int argc, char** argv) {
     outputFile << std::endl;
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
+
+    outputFile
+	<< "	std::cout << "
+	<< quote << "tensor result for closing ..." << quote
+	<< " << std::endl;" << std::endl;
+    outputFile << "	std::cout << input << std::endl;" << std::endl;
+    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+    outputFile
+	<< "	std::cout << "
+	<< quote << "-----------------------------" << quote
+	<< " << std::endl;" << std::endl;
+    outputFile << "	std::cout << std::endl;" << std::endl;
 
     // ----
 

@@ -33,7 +33,6 @@ execute_process(
 
 execute_process(
    COMMAND cp ./readMarket.cpp ./build/
-   COMMAND cp ./apple-inc-appl.csv ./build/
    COMMAND cp ./aes-cotizaciones-historicas.csv ./build/
    #COMMAND cp -r ./tensorflow ./build/
 )
