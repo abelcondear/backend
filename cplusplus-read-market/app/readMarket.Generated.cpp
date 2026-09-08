@@ -33,7 +33,12 @@ int main(int argc, char** argv) {
 
     // ----------------------------------------
 
-    std::ofstream outputFile("readMarket.cpp");
+    std::ofstream outputFile("./readMarket.cpp");
+
+    // ----
+    std::ofstream openColumnFile("./OpenColumn.log");
+    std::ofstream closeColumnFile("./CloseColumn.log");
+    // ----
 
     // ----------------------------------------
 
@@ -41,14 +46,18 @@ int main(int argc, char** argv) {
     // ----------------------------------------
     // characters configuration - BEGIN
 
+    // ----
     char slash = 47; // "/" slash
     char quote = 34; // '"' quote
+    // ----
 
+    // ----
     char tab = 9; // tab
     char newline = 10; // new line
     char verticaltab = 11; // vertical tab
     char formfeed = 12; // form feed
     char creturn = 13; // carriage return
+    // ----
 
     // characters configuration - END
     // ----------------------------------------
@@ -61,6 +70,7 @@ int main(int argc, char** argv) {
     int amount_tensor = 0; // amount of tensors
     char delimiter = 0; // delimiter character
     char* pathFile = 0; // path input-file
+    char* column_name = 0; // column name from input-file
 
     std::string text = argv[1];
     std::vector<std::string> result = split(text, '=');
@@ -88,6 +98,20 @@ int main(int argc, char** argv) {
 	pathFile = (char*) malloc(result[1].length() + 1);
 
 	strcpy(pathFile, charArr);
+    }
+
+    text = argv[4];
+    result = split(text, '=');
+
+    if (result[0].compare("--columnName") == 0) {
+	char charArr[result[1].length() + 1];
+
+	std::copy(result[1].begin(), result[1].end(), charArr);
+	charArr[result[1].length()] = '\0';
+
+	column_name = (char*) malloc(result[1].length() + 1);
+
+	strcpy(column_name, charArr);
     }
 
     if (amount_tensor == 0 || delimiter == 0 || strlen(pathFile) == 0) {
@@ -395,11 +419,14 @@ int main(int argc, char** argv) {
 
     outputFile << "     std::vector<float> open_column;" << std::endl;
     outputFile << "     std::vector<float> close_column;" << std::endl;
+    outputFile << "     std::vector<std::string> date_column;" << std::endl;
 
     outputFile << std::endl;
     // ----
     outputFile << "     float open_value = 0.0;" << std::endl;
     outputFile << "     float close_value = 0.0;" << std::endl;
+    outputFile << "     std::string date_value;" << std::endl;
+
     outputFile << std::endl;
     // ----
 
@@ -418,6 +445,7 @@ int main(int argc, char** argv) {
     outputFile << "          g = (*gg).begin();" << std::endl;
     outputFile << std::endl;
     // ----
+    outputFile << "          date_value = std::get<0>(*g);" << std::endl;
     outputFile << "          open_value = std::get<1>(*g);" << std::endl;
     outputFile << "          close_value = std::get<4>(*g);" << std::endl;
 
@@ -425,6 +453,7 @@ int main(int argc, char** argv) {
     outputFile << std::endl;
 
     // ----
+    outputFile << "          date_column.push_back(date_value);" << std::endl;
     outputFile << "          open_column.push_back(open_value);" << std::endl;
     outputFile << "          close_column.push_back(close_value);" << std::endl;
     // ----
@@ -473,22 +502,36 @@ int main(int argc, char** argv) {
     outputFile << "       torch::kFloat32" << std::endl;
     outputFile << "     );" << std::endl;
     outputFile << std::endl;
+
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
 
-    outputFile
-	<< "	std::cout << "
-	<< quote << "tensor result for opening ..." << quote
-	<< " << std::endl;" << std::endl;
-    outputFile << "	std::cout << input << std::endl;" << std::endl;
-    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
-    outputFile
-	<< "	std::cout << "
-	<< quote << "-----------------------------" << quote
-	<< " << std::endl;" << std::endl;
-    outputFile << "	std::cout << std::endl;" << std::endl;
+
+    if (std::string(column_name) == "open") {
+
+	    // ----
+	    //outputFile
+	    //	<< "	std::cout << "
+	    //	<< quote << "tensor result for opening ..." << quote
+	    //	<< " << std::endl;" << std::endl;
+	    // ----
+
+	    outputFile << "	std::cout << input << std::endl;" << std::endl;
+	    //outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+
+	    // ----
+	    //outputFile
+	    //	<< "	std::cout << "
+	    //	<< quote << "-----------------------------" << quote
+	    //	<< " << std::endl;" << std::endl;
+	    // ----
+
+	    outputFile << "	std::cout << std::endl;" << std::endl;
+
+    }
 
     outputFile << std::endl;
+
     // ----
     outputFile << "     std::cout << std::endl;" << std::endl;
     outputFile << std::endl;
@@ -527,20 +570,32 @@ int main(int argc, char** argv) {
     outputFile << "       torch::kFloat32" << std::endl;
     outputFile << "     );" << std::endl;
     outputFile << std::endl;
+
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
 
-    outputFile
-	<< "	std::cout << "
-	<< quote << "tensor result for closing ..." << quote
-	<< " << std::endl;" << std::endl;
-    outputFile << "	std::cout << input << std::endl;" << std::endl;
-    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
-    outputFile
-	<< "	std::cout << "
-	<< quote << "-----------------------------" << quote
-	<< " << std::endl;" << std::endl;
-    outputFile << "	std::cout << std::endl;" << std::endl;
+    if (std::string(column_name) == "close") {
+
+	    // ----
+	    //outputFile
+	    //	<< "	std::cout << "
+	    //	<< quote << "tensor result for closing ..." << quote
+	    //	<< " << std::endl;" << std::endl;
+	    // ----
+
+	    outputFile << "	std::cout << input << std::endl;" << std::endl;
+	    //outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+
+	    // ----
+	    //outputFile
+	    //	<< "	std::cout << "
+	    //	<< quote << "-----------------------------" << quote
+	    //	<< " << std::endl;" << std::endl;
+	    // ----
+
+	    //outputFile << "	std::cout << std::endl;" << std::endl;
+
+    }
 
     // ----
 
@@ -576,7 +631,8 @@ int main(int argc, char** argv) {
     outputFile << "(" << std::endl;
     outputFile << "     const std::string& pathFile," << std::endl;
     outputFile << "     const char chrSplit," << std::endl;
-    outputFile << "     const int amountTensor" << std::endl;
+    outputFile << "     const int amountTensor," << std::endl;
+    outputFile << "     const std::string columnName" << std::endl;
     outputFile << ") {" << std::endl;
     // ----
     outputFile << "     CustomModel model(1, 1, 1);" << std::endl;
@@ -759,7 +815,7 @@ int main(int argc, char** argv) {
     // ----
     outputFile << std::endl;
 
-
+    // ----
     outputFile << "     return getModel(" << std::endl;
     outputFile << "          myArr," << std::endl;
     outputFile << "          amountTensor" << std::endl;
@@ -789,10 +845,11 @@ int main(int argc, char** argv) {
     // ----
     outputFile << "     const char paramDelimiter = '" << delimiter << "';" << std::endl;
     outputFile << "     const int paramAmountTensor = " << amount_tensor << ";" << std::endl;
+    outputFile << "     const std::string paramColumnName  = " << quote << column_name << quote << ";" << std::endl;
     outputFile << std::endl;
     outputFile << std::endl;
     // ----
-    outputFile << "     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor);" << std::endl;
+    outputFile << "     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName);" << std::endl;
     outputFile << std::endl;
     // ----
     outputFile << "     return 0;" << std::endl;

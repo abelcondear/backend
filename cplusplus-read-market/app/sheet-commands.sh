@@ -1,5 +1,5 @@
 # ---------------------------
-# linux terminal command
+# linux terminal commands
 # ---------------------------
 #
 #  --- python torch installation ---
@@ -10,7 +10,7 @@
 #
 #  --- remove and build app ---
 #  rm -r ./build/ || true && cmake -S . -B ./build/
-#  rm -r ./build/ || true && cmake -S . -B ./build/ && cp readMarket.cpp ./build/ && cmake --build ./build --config Release && ./build/readMarket
+#  rm -r ./build/ || true && cmake -S . -B ./build/ && cp readMarket.cpp ./build/ && cmake --build ./build --config Release && cd ./build && ./readMarket && cd ../
 #  rm -r ./build/ && cmake -S . -B ./build/
 #
 #  --- create build folder and import library  ---
@@ -24,8 +24,8 @@
 #
 #  --- create binary program  ---
 #  g++ readMarket.Generated.cpp -o readMarket.Generated
-#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv"
-#
+#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --columnName="open"
+#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --columnName="close"
 #
 #  --- create binary program using parameter for Tensorflow library ---
 #  g++ readMarket.cpp -o readMarket -ltensorflow
