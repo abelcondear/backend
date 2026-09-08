@@ -35,11 +35,6 @@ int main(int argc, char** argv) {
 
     std::ofstream outputFile("./readMarket.cpp");
 
-    // ----
-    std::ofstream openColumnFile("./OpenColumn.log");
-    std::ofstream closeColumnFile("./CloseColumn.log");
-    // ----
-
     // ----------------------------------------
 
 
