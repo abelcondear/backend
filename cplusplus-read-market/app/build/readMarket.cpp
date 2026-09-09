@@ -327,8 +327,6 @@ CustomModel getModel(
 
      input = model.forward(input_tensor);
 
-	std::cout << input << std::endl;
-	std::cout << std::endl;
 
      std::cout << std::endl;
 
@@ -487,6 +485,7 @@ CustomModel getModel(
 
      input = model.forward(input_tensor);
 
+	std::cout << input << std::endl;
 
 
      return model;
@@ -663,7 +662,7 @@ int main(int argc, char *argv[]) {
 
      const char paramDelimiter = ';';
      const int paramAmountTensor = 145;
-     const std::string paramColumnName  = "open";
+     const std::string paramColumnName  = "close";
      const std::string paramInTensor  = "";
 
 

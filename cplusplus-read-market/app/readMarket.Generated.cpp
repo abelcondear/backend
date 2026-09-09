@@ -1,14 +1,3 @@
-// last error
-// -------------------------------------
-// ./readMarket.Generated --amount=145 --delimiter=";"
-// --pathFile="./aes-cotizaciones-historicas.csv" --inputTensor="open:yes"
-// terminate called after throwing an instance of 'std::logic_error'
-//  what():  basic_string: construction from null is not valid
-// Aborted                    (core dumped)
-// ./readMarket.Generated --amount=145 --delimiter=";"
-// --pathFile="./aes-cotizaciones-historicas.csv"
-// --inputTensor="open:yes"
-
 // ----------------------------------------
 
 #include <fstream>
@@ -134,20 +123,16 @@ int main(int argc, char** argv) {
 	strcpy(column_name, charArr);
     }
     else {
-	char charArr[2];
+	char charArr[1];
 
-	charArr[0] = 0;
-	charArr[1] = '\0';
+	charArr[0] = '\0';
 
-	column_name = (char*) malloc(2);
+	column_name = (char*) malloc(1);
 
 	strcpy(column_name, charArr);
     }
 
     if (result[0].compare("--inputTensor") == 0) {
-   	//text = argv[4];
-    	//result = split(text, '=');
-
 	char charArr[result[1].length() + 1];
 
 	std::copy(result[1].begin(), result[1].end(), charArr);
@@ -158,25 +143,24 @@ int main(int argc, char** argv) {
 	strcpy(in_tensor, charArr);
     }
     else {
-	char charArr[2];
+	char charArr[1];
 
-	charArr[0] = 0;
-	charArr[1] = '\0';
+	charArr[0] = '\0';
 
-	in_tensor = (char*) malloc(2);
+	in_tensor = (char*) malloc(1);
 
 	strcpy(in_tensor, charArr);
     }
 
     if
 	(
-		(
+		( // rule one
 			amount_tensor == 0
 			|| delimiter == 0
 			|| strlen(pathFile) == 0
 		)
-		&&
-		(
+		||
+		( // rule two
 			strlen(column_name) == 0
 			&& strlen(in_tensor) == 0
 		)
