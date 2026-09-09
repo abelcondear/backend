@@ -498,7 +498,8 @@ CustomModel readCSV
      const std::string& pathFile,
      const char chrSplit,
      const int amountTensor,
-     const std::string columnName
+     const std::string columnName,
+     const std::string inTensor
 ) {
      CustomModel model(1, 1, 1);
 
@@ -663,9 +664,10 @@ int main(int argc, char *argv[]) {
      const char paramDelimiter = ';';
      const int paramAmountTensor = 145;
      const std::string paramColumnName  = "open";
+     const std::string paramInTensor  = "";
 
 
-     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName);
+     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName, paramInTensor);
 
      return 0;
 }

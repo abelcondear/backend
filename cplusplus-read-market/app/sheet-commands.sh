@@ -26,6 +26,8 @@
 #  g++ readMarket.Generated.cpp -o readMarket.Generated
 #  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --columnName="open"
 #  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --columnName="close"
+#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --inputTensor="open:yes"
+#  ./readMarket.Generated --amount=145 --delimiter=";" --pathFile="./aes-cotizaciones-historicas.csv" --inputTensor="close:yes"
 #
 #  --- create binary program using parameter for Tensorflow library ---
 #  g++ readMarket.cpp -o readMarket -ltensorflow

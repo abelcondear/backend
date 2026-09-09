@@ -1,3 +1,14 @@
+// last error
+// -------------------------------------
+// ./readMarket.Generated --amount=145 --delimiter=";"
+// --pathFile="./aes-cotizaciones-historicas.csv" --inputTensor="open:yes"
+// terminate called after throwing an instance of 'std::logic_error'
+//  what():  basic_string: construction from null is not valid
+// Aborted                    (core dumped)
+// ./readMarket.Generated --amount=145 --delimiter=";"
+// --pathFile="./aes-cotizaciones-historicas.csv"
+// --inputTensor="open:yes"
+
 // ----------------------------------------
 
 #include <fstream>
@@ -21,6 +32,19 @@ std::vector<std::string> split(const std::string &str, char delim) {
 	}
 
 	return tokens;
+}
+
+// ----------------------------------------
+
+bool iequals(const std::string& a, const std::string& b) {
+    if (a.size() != b.size()) {
+        return false;
+    }
+
+    return std::equal(a.begin(), a.end(), b.begin(),
+        [](unsigned char ac, unsigned char bc) {
+            return std::tolower(ac) == std::tolower(bc);
+        });
 }
 
 // ----------------------------------------
@@ -66,6 +90,7 @@ int main(int argc, char** argv) {
     char delimiter = 0; // delimiter character
     char* pathFile = 0; // path input-file
     char* column_name = 0; // column name from input-file
+    char* in_tensor = 0; // input tensor
 
     std::string text = argv[1];
     std::vector<std::string> result = split(text, '=');
@@ -108,8 +133,55 @@ int main(int argc, char** argv) {
 
 	strcpy(column_name, charArr);
     }
+    else {
+	char charArr[2];
 
-    if (amount_tensor == 0 || delimiter == 0 || strlen(pathFile) == 0) {
+	charArr[0] = 0;
+	charArr[1] = '\0';
+
+	column_name = (char*) malloc(2);
+
+	strcpy(column_name, charArr);
+    }
+
+    if (result[0].compare("--inputTensor") == 0) {
+   	//text = argv[4];
+    	//result = split(text, '=');
+
+	char charArr[result[1].length() + 1];
+
+	std::copy(result[1].begin(), result[1].end(), charArr);
+	charArr[result[1].length()] = '\0';
+
+	in_tensor = (char*) malloc(result[1].length() + 1);
+
+	strcpy(in_tensor, charArr);
+    }
+    else {
+	char charArr[2];
+
+	charArr[0] = 0;
+	charArr[1] = '\0';
+
+	in_tensor = (char*) malloc(2);
+
+	strcpy(in_tensor, charArr);
+    }
+
+    if
+	(
+		(
+			amount_tensor == 0
+			|| delimiter == 0
+			|| strlen(pathFile) == 0
+		)
+		&&
+		(
+			strlen(column_name) == 0
+			&& strlen(in_tensor) == 0
+		)
+	)
+    {
         std::cerr << "Error: No all parameters were specified." << std::endl;
         return 1;
     }
@@ -501,8 +573,22 @@ int main(int argc, char** argv) {
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
 
+    if
+	(
+		strlen(in_tensor) != 0
+		&& iequals( std::string(in_tensor), "open:yes" )
+	)
+    {
 
-    if (std::string(column_name) == "open") {
+	    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+
+    }
+    else if
+	(
+		strlen(column_name) != 0
+		&& std::string(column_name) == "open"
+	)
+    {
 
 	    // ----
 	    //outputFile
@@ -512,6 +598,8 @@ int main(int argc, char** argv) {
 	    // ----
 
 	    outputFile << "	std::cout << input << std::endl;" << std::endl;
+
+
 	    //outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
 
 	    // ----
@@ -569,7 +657,22 @@ int main(int argc, char** argv) {
     outputFile << "     input = model.forward(input_tensor);" << std::endl;
     outputFile << std::endl;
 
-    if (std::string(column_name) == "close") {
+    if
+	(
+		strlen(in_tensor) != 0
+		&& iequals( std::string(in_tensor), "close:yes" )
+	)
+    {
+
+	    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+
+    }
+    else if
+	(
+		strlen(column_name) != 0
+		&& std::string(column_name) == "close"
+	)
+    {
 
 	    // ----
 	    //outputFile
@@ -627,7 +730,8 @@ int main(int argc, char** argv) {
     outputFile << "     const std::string& pathFile," << std::endl;
     outputFile << "     const char chrSplit," << std::endl;
     outputFile << "     const int amountTensor," << std::endl;
-    outputFile << "     const std::string columnName" << std::endl;
+    outputFile << "     const std::string columnName," << std::endl;
+    outputFile << "     const std::string inTensor" << std::endl;
     outputFile << ") {" << std::endl;
     // ----
     outputFile << "     CustomModel model(1, 1, 1);" << std::endl;
@@ -841,10 +945,11 @@ int main(int argc, char** argv) {
     outputFile << "     const char paramDelimiter = '" << delimiter << "';" << std::endl;
     outputFile << "     const int paramAmountTensor = " << amount_tensor << ";" << std::endl;
     outputFile << "     const std::string paramColumnName  = " << quote << column_name << quote << ";" << std::endl;
+    outputFile << "     const std::string paramInTensor  = " << quote << in_tensor << quote << ";" << std::endl;
     outputFile << std::endl;
     outputFile << std::endl;
     // ----
-    outputFile << "     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName);" << std::endl;
+    outputFile << "     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName, paramInTensor);" << std::endl;
     outputFile << std::endl;
     // ----
     outputFile << "     return 0;" << std::endl;
