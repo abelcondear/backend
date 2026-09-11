@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/scott/Documents/Me/Programs/backend/c++/readMarket-v9.2/app
+CMAKE_SOURCE_DIR = /home/scott/Documents/Me/Download/new/ai/cplusplus-read-market/app
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/scott/Documents/Me/Programs/backend/c++/readMarket-v9.2/app/build
+CMAKE_BINARY_DIR = /home/scott/Documents/Me/Download/new/ai/cplusplus-read-market/app/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/scott/Documents/Me/Programs/backend/c++/readMarket-v9.2/app/build/CMakeFiles /home/scott/Documents/Me/Programs/backend/c++/readMarket-v9.2/app/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/scott/Documents/Me/Download/new/ai/cplusplus-read-market/app/build/CMakeFiles /home/scott/Documents/Me/Download/new/ai/cplusplus-read-market/app/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/scott/Documents/Me/Programs/backend/c++/readMarket-v9.2/app/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/scott/Documents/Me/Download/new/ai/cplusplus-read-market/app/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

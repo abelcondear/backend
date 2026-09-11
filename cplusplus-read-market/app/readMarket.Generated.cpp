@@ -30,10 +30,19 @@ bool iequals(const std::string& a, const std::string& b) {
         return false;
     }
 
-    return std::equal(a.begin(), a.end(), b.begin(),
-        [](unsigned char ac, unsigned char bc) {
+    return std::equal(
+	a.begin(),
+	a.end(),
+	b.begin(),
+        []
+	(
+		unsigned char ac,
+		unsigned char bc
+	)
+	{
             return std::tolower(ac) == std::tolower(bc);
-        });
+        }
+    );
 }
 
 // ----------------------------------------
@@ -154,13 +163,13 @@ int main(int argc, char** argv) {
 
     if
 	(
-		( // rule one
+		( // rule #1
 			amount_tensor == 0
 			|| delimiter == 0
 			|| strlen(pathFile) == 0
 		)
 		||
-		( // rule two
+		( // rule #2
 			strlen(column_name) == 0
 			&& strlen(in_tensor) == 0
 		)
@@ -565,6 +574,7 @@ int main(int argc, char** argv) {
     {
 
 	    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+	    outputFile << "	std::cout << std::endl;" << std::endl;
 
     }
     else if
@@ -574,25 +584,7 @@ int main(int argc, char** argv) {
 	)
     {
 
-	    // ----
-	    //outputFile
-	    //	<< "	std::cout << "
-	    //	<< quote << "tensor result for opening ..." << quote
-	    //	<< " << std::endl;" << std::endl;
-	    // ----
-
 	    outputFile << "	std::cout << input << std::endl;" << std::endl;
-
-
-	    //outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
-
-	    // ----
-	    //outputFile
-	    //	<< "	std::cout << "
-	    //	<< quote << "-----------------------------" << quote
-	    //	<< " << std::endl;" << std::endl;
-	    // ----
-
 	    outputFile << "	std::cout << std::endl;" << std::endl;
 
     }
@@ -649,6 +641,7 @@ int main(int argc, char** argv) {
     {
 
 	    outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
+	    outputFile << "	std::cout << std::endl;" << std::endl;
 
     }
     else if
@@ -658,24 +651,8 @@ int main(int argc, char** argv) {
 	)
     {
 
-	    // ----
-	    //outputFile
-	    //	<< "	std::cout << "
-	    //	<< quote << "tensor result for closing ..." << quote
-	    //	<< " << std::endl;" << std::endl;
-	    // ----
-
 	    outputFile << "	std::cout << input << std::endl;" << std::endl;
-	    //outputFile << "	std::cout << input_tensor << std::endl;" << std::endl;
-
-	    // ----
-	    //outputFile
-	    //	<< "	std::cout << "
-	    //	<< quote << "-----------------------------" << quote
-	    //	<< " << std::endl;" << std::endl;
-	    // ----
-
-	    //outputFile << "	std::cout << std::endl;" << std::endl;
+	    outputFile << "	std::cout << std::endl;" << std::endl;
 
     }
 
@@ -810,7 +787,7 @@ int main(int argc, char** argv) {
     outputFile << "     }" << std::endl;
     outputFile << std::endl;
     // ----
-    outputFile << "     std::vector<std::vector<std::tuple<std::string, float, float, float, float, float, float>>> myArr;" << std::endl;
+    outputFile << "     std::vector<std::vector<std::tuple<std::string, float, float, float, float, float, float>>> rowsArr;" << std::endl;
     outputFile << "     std::vector<std::tuple<std::string, float, float, float, float, float, float>> rowArr;" << std::endl;
     outputFile << std::endl;
     outputFile << "     std::vector<std::vector<std::string>>::iterator itt_begin = rows.begin();" << std::endl;  // this was updated
@@ -873,7 +850,7 @@ int main(int argc, char** argv) {
     outputFile << "                         )" << std::endl;
     outputFile << "                    );" << std::endl;
     outputFile << std::endl;
-    outputFile << "                    myArr.push_back(rowArr);" << std::endl;
+    outputFile << "                    rowsArr.push_back(rowArr);" << std::endl;
     outputFile << std::endl;
     outputFile << "                    rowArr.erase(" << std::endl;
     outputFile << "                         rowArr.begin()," << std::endl;
@@ -900,7 +877,7 @@ int main(int argc, char** argv) {
 
     // ----
     outputFile << "     return getModel(" << std::endl;
-    outputFile << "          myArr," << std::endl;
+    outputFile << "          rowsArr," << std::endl;
     outputFile << "          amountTensor" << std::endl;
     outputFile << "     );" << std::endl;
     // ----
@@ -933,7 +910,13 @@ int main(int argc, char** argv) {
     outputFile << std::endl;
     outputFile << std::endl;
     // ----
-    outputFile << "     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName, paramInTensor);" << std::endl;
+    outputFile << "     CustomModel model = readCSV(" << std::endl;
+    outputFile << "				paramPathFile," << std::endl;
+    outputFile << "				paramDelimiter," << std::endl;
+    outputFile << "				paramAmountTensor," << std::endl;
+    outputFile << "				paramColumnName," << std::endl;
+    outputFile << "				paramInTensor" << std::endl;
+    outputFile << "	);" << std::endl;
     outputFile << std::endl;
     // ----
     outputFile << "     return 0;" << std::endl;
@@ -952,6 +935,7 @@ int main(int argc, char** argv) {
 
 
     // ----------------------------------------
+    // close file for writing
 
     outputFile.close();
 

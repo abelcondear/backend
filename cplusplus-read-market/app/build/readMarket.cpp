@@ -486,6 +486,7 @@ CustomModel getModel(
      input = model.forward(input_tensor);
 
 	std::cout << input << std::endl;
+	std::cout << std::endl;
 
 
      return model;
@@ -575,7 +576,7 @@ CustomModel readCSV
           }
      }
 
-     std::vector<std::vector<std::tuple<std::string, float, float, float, float, float, float>>> myArr;
+     std::vector<std::vector<std::tuple<std::string, float, float, float, float, float, float>>> rowsArr;
      std::vector<std::tuple<std::string, float, float, float, float, float, float>> rowArr;
 
      std::vector<std::vector<std::string>>::iterator itt_begin = rows.begin();
@@ -633,7 +634,7 @@ CustomModel readCSV
                          )
                     );
 
-                    myArr.push_back(rowArr);
+                    rowsArr.push_back(rowArr);
 
                     rowArr.erase(
                          rowArr.begin(),
@@ -651,14 +652,14 @@ CustomModel readCSV
      file.close();
 
      return getModel(
-          myArr,
+          rowsArr,
           amountTensor
      );
 }
 
 
 int main(int argc, char *argv[]) {
-     const std::string paramPathFile = "./aes-cotizaciones-historicas.csv";
+     const std::string paramPathFile = "./aes-spreadsheet.csv";
 
      const char paramDelimiter = ';';
      const int paramAmountTensor = 145;
@@ -666,7 +667,13 @@ int main(int argc, char *argv[]) {
      const std::string paramInTensor  = "";
 
 
-     CustomModel model = readCSV(paramPathFile, paramDelimiter, paramAmountTensor, paramColumnName, paramInTensor);
+     CustomModel model = readCSV(
+				paramPathFile,
+				paramDelimiter,
+				paramAmountTensor,
+				paramColumnName,
+				paramInTensor
+	);
 
      return 0;
 }
